@@ -51,3 +51,10 @@ class WeatherAPI:
     
     def get_temperature(self, hour):
         return self.weather_data["hourly"]["temperature_2m"][hour]
+    
+    def get_cur_rain(self):
+        hour = datetime.now().hour
+        return self.weather_data["hourly"]["rain"][hour]
+    
+    def get_rain(self, hour):
+        return self.weather_data["hourly"]["rain"][hour]
