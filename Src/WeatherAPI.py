@@ -45,23 +45,23 @@ class WeatherAPI:
         elif api_response.status_code == 400:
             return "FAIL"
         
-    def get_cur_temperature(self):
+    def get_cur_temperature(self) -> float:
         hour = datetime.now().hour
         return self.weather_data["hourly"]["temperature_2m"][hour]
     
-    def get_temperature(self, hour):
+    def get_temperature(self, hour) -> float:
         return self.weather_data["hourly"]["temperature_2m"][hour]
     
-    def get_cur_rain(self):
+    def get_cur_rain(self) -> float:
         hour = datetime.now().hour
         return self.weather_data["hourly"]["rain"][hour]
     
-    def get_rain(self, hour):
+    def get_rain(self, hour) -> float:
         return self.weather_data["hourly"]["rain"][hour]
     
-    def get_cur_precipitation_probability(self):
+    def get_cur_precipitation_probability(self) -> int:
         hour = datetime.now().hour
         return self.weather_data["hourly"]["precipitation_probability"][hour]
     
-    def get_precipitation_probability(self, hour):
+    def get_precipitation_probability(self, hour) -> int:
         return self.weather_data["hourly"]["precipitation_probability"][hour]
