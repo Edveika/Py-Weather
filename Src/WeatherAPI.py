@@ -19,6 +19,9 @@ class WeatherAPI:
         api_response = requests.get(f"https://geocoding-api.open-meteo.com/v1/search?name={city}")
         if api_response.status_code == 200:
             location_data = json.loads(api_response.text)
+            if len(location_data) == 1:
+                return "CITY_NOT_FOUND"
+
             self.latitude = location_data["results"][0]["latitude"]
             self.longitude = location_data["results"][0]["longitude"]
             return "SUCCESS"
@@ -29,7 +32,7 @@ class WeatherAPI:
         if not self.connected_to_internet():
             return "NO_INTERNET_CONNECTION"
         
-        if self.retrieve_coordinates(city) == "FAIL":
+        if self.retrieve_coordinates(city) == "FAIL" or "CITY_NOT_FOUND":
             return "COORDINATE_RETRIEVE_FAILED"
 
         api_response = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude={self.latitude}&longitude={self.longitude}&hourly=temperature_2m,rain")
