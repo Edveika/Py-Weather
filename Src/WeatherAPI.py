@@ -37,7 +37,7 @@ class WeatherAPI:
         if coord_retrieve_status == "FAIL" or coord_retrieve_status == "CITY_NOT_FOUND":
             return "COORDINATE_RETRIEVE_FAILED"
 
-        api_response = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude={self.latitude}&longitude={self.longitude}&hourly=temperature_2m,rain")
+        api_response = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude={self.latitude}&longitude={self.longitude}&hourly=temperature_2m,rain,precipitation_probability")
         
         if api_response.status_code == 200:
             self.weather_data = json.loads(api_response.text)
@@ -58,3 +58,10 @@ class WeatherAPI:
     
     def get_rain(self, hour):
         return self.weather_data["hourly"]["rain"][hour]
+    
+    def get_cur_precipitation_probability(self):
+        hour = datetime.now().hour
+        return self.weather_data["hourly"]["precipitation_probability"][hour]
+    
+    def get_precipitation_probability(self, hour):
+        return self.weather_data["hourly"]["precipitation_probability"][hour]
