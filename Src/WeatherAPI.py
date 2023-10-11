@@ -1,5 +1,6 @@
 import requests
 import json
+from datetime import datetime
 
 class WeatherAPI:
     def __init__(self):
@@ -32,7 +33,8 @@ class WeatherAPI:
         if not self.connected_to_internet():
             return "NO_INTERNET_CONNECTION"
         
-        if self.retrieve_coordinates(city) == "FAIL" or "CITY_NOT_FOUND":
+        coord_retrieve_status = self.retrieve_coordinates(city)
+        if coord_retrieve_status == "FAIL" or coord_retrieve_status == "CITY_NOT_FOUND":
             return "COORDINATE_RETRIEVE_FAILED"
 
         api_response = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude={self.latitude}&longitude={self.longitude}&hourly=temperature_2m,rain")
@@ -42,3 +44,10 @@ class WeatherAPI:
             return "SUCCESS"
         elif api_response.status_code == 400:
             return "FAIL"
+        
+    def get_cur_temperature(self):
+        hour = datetime.now().hour
+        return self.weather_data["hourly"]["temperature_2m"][hour]
+    
+    def get_temperature(self, hour):
+        return self.weather_data["hourly"]["temperature_2m"][hour]
