@@ -1,6 +1,5 @@
 import requests
 import json
-from datetime import datetime
 
 class WeatherAPI:
     def __init__(self):
@@ -37,7 +36,7 @@ class WeatherAPI:
         if coord_retrieve_status == "FAIL" or coord_retrieve_status == "CITY_NOT_FOUND":
             return "COORDINATE_RETRIEVE_FAILED"
 
-        api_response = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude={self.latitude}&longitude={self.longitude}&current=temperature_2m,is_day,precipitation,rain,showers,snowfall,cloudcover,windspeed_10m,winddirection_10m&hourly=temperature_2m,precipitation_probability,rain,showers,snowfall,cloudcover,windspeed_10m,winddirection_10m,is_day&daily=temperature_2m_max,temperature_2m_min,sunrise,precipitation_sum,rain_sum,showers_sum,snowfall_sum,precipitation_hours,precipitation_probability_max,windspeed_10m_max,winddirection_10m_dominant&timezone=auto")
+        api_response = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude={self.latitude}&longitude={self.longitude}&current=temperature_2m,is_day,precipitation,rain,showers,snowfall,cloudcover,windspeed_10m,winddirection_10m&hourly=temperature_2m,precipitation_probability,rain,showers,snowfall,cloudcover,windspeed_10m,winddirection_10m,is_day&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,rain_sum,showers_sum,snowfall_sum,precipitation_hours,precipitation_probability_max,windspeed_10m_max,winddirection_10m_dominant&timezone=auto")
         
         if api_response.status_code == 200:
             self.weather_data = json.loads(api_response.text)
@@ -128,3 +127,59 @@ class WeatherAPI:
     # Returns chance of precipitation in % list for 7 days from now
     def get_hourly_precipitation_probability(self):
         return self.weather_data["hourly"]["precipitation_probability"]
+    
+    ##
+    ## Daily data
+    ##
+
+    # Returns a list of dates 7 days from now
+    def get_daily_time(self):
+        return self.weather_data["daily"]["time"]
+    
+    # Returns a list of minimum temperatures 7 days from now
+    def get_daily_temperature_min(self):
+        return self.weather_data["daily"]["temperature_2m_min"]
+    
+    # Returns a list of maximum temperatures 7 days from now
+    def get_daily_temperature_max(self):
+        return self.weather_data["daily"]["temperature_2m_max"]
+    
+    # Returns a list of daily sunrise time
+    def get_daily_sunrise(self):
+        return self.weather_data["daily"]["sunrise"]
+    
+    # Returns a list of daily sunset time
+    def get_daily_sunset(self):
+        return self.weather_data["daily"]["sunset"]
+    
+    # Returns a list of daily sunrise time
+    def get_daily_precipitation_sum(self):
+        return self.weather_data["daily"]["precipitation_sum"]
+    
+    # Returns list of daily rain sum(mm)
+    def get_daily_rain_sum(self):
+        return self.weather_data["daily"]["rain_sum"]
+    
+    # Returns list of daily showers sum(mm)
+    def get_daily_showers_sum(self):
+        return self.weather_data["daily"]["showers_sum"]
+    
+    # Returns list of daily snowfall sum(cm)
+    def get_daily_snowfall_sum(self):
+        return self.weather_data["daily"]["snowfall_sum"]
+    
+    # Returns list of daily sum of hours with rain
+    def get_daily_precipitation_hours(self):
+        return self.weather_data["daily"]["precipitation_hours"]
+    
+    # Returns list of daily maximum probability of precipitation
+    def get_daily_precipitation_probability_max(self):
+        return self.weather_data["daily"]["precipitation_probability_max"]
+    
+    # Returns list of daily maximum windspeed(m/s)
+    def get_daily_windspeed_max(self):
+        return self.weather_data["daily"]["windspeed_10m_max"]
+    
+    # Returns a list of daily dominant wind direction
+    def get_daily_wind_dir(self):
+        return self.weather_data["daily"]["winddirection_10m_dominant"]
