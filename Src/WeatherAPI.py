@@ -33,8 +33,10 @@ class WeatherAPI:
             return "NO_INTERNET_CONNECTION"
         
         coord_retrieve_status = self.retrieve_coordinates(city)
-        if coord_retrieve_status == "FAIL" or coord_retrieve_status == "CITY_NOT_FOUND":
+        if coord_retrieve_status == "FAIL":
             return "COORDINATE_RETRIEVE_FAILED"
+        elif coord_retrieve_status == "CITY_NOT_FOUND":
+            return "CITY_NOT_FOUND"
 
         api_response = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude={self.latitude}&longitude={self.longitude}&current=temperature_2m,is_day,precipitation,rain,showers,snowfall,cloudcover,windspeed_10m,winddirection_10m&hourly=temperature_2m,precipitation_probability,rain,showers,snowfall,cloudcover,windspeed_10m,winddirection_10m,is_day&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,rain_sum,showers_sum,snowfall_sum,precipitation_hours,precipitation_probability_max,windspeed_10m_max,winddirection_10m_dominant&timezone=auto")
         
