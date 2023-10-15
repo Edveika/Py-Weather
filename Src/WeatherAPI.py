@@ -37,31 +37,30 @@ class WeatherAPI:
         if coord_retrieve_status == "FAIL" or coord_retrieve_status == "CITY_NOT_FOUND":
             return "COORDINATE_RETRIEVE_FAILED"
 
-        api_response = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude={self.latitude}&longitude={self.longitude}&hourly=temperature_2m,rain,precipitation_probability")
+        api_response = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude={self.latitude}&longitude={self.longitude}&current=temperature_2m,is_day,precipitation,rain,showers,snowfall,cloudcover,windspeed_10m,winddirection_10m&hourly=temperature_2m,precipitation_probability,rain,showers,snowfall,cloudcover,windspeed_10m,winddirection_10m,is_day&daily=temperature_2m_max,temperature_2m_min,sunrise,precipitation_sum,rain_sum,showers_sum,snowfall_sum,precipitation_hours,precipitation_probability_max,windspeed_10m_max,winddirection_10m_dominant&timezone=auto")
         
         if api_response.status_code == 200:
             self.weather_data = json.loads(api_response.text)
             return "SUCCESS"
         elif api_response.status_code == 400:
             return "FAIL"
-        
+    
+    # Returns current temperature
     def get_cur_temperature(self) -> float:
-        hour = datetime.now().hour
-        return self.weather_data["hourly"]["temperature_2m"][hour]
+        return self.weather_data["current"]["temperature_2m"]
     
-    def get_temperature(self, hour) -> float:
-        return self.weather_data["hourly"]["temperature_2m"][hour]
+    # Returns hourly temperature for 7 days from now
+    def get_hourly_temperature(self) -> float:
+        return self.weather_data["hourly"]["temperature_2m"]
     
+    # Gets rain amount in mm
     def get_cur_rain(self) -> float:
-        hour = datetime.now().hour
-        return self.weather_data["hourly"]["rain"][hour]
+        return self.weather_data["current"]["rain"]
     
-    def get_rain(self, hour) -> float:
-        return self.weather_data["hourly"]["rain"][hour]
+    # Gets hourly rain for 7 days from now
+    def get_hourly_rain(self) -> float:
+        return self.weather_data["hourly"]["rain"]
     
-    def get_cur_precipitation_probability(self) -> int:
-        hour = datetime.now().hour
-        return self.weather_data["hourly"]["precipitation_probability"][hour]
-    
-    def get_precipitation_probability(self, hour) -> int:
-        return self.weather_data["hourly"]["precipitation_probability"][hour]
+    # Gets chance of precipitation for 7 days from now
+    def get_hourly_precipitation_probability(self) -> int:
+        return self.weather_data["hourly"]["precipitation_probability"]
