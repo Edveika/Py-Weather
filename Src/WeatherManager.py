@@ -11,6 +11,32 @@ class WeatherManager:
         self.exit = False
         self.api_manager = WeatherAPI()
 
+    def update_weather(self):
+        # Wait for the user to choose a city
+        while self.city == None: pass
+
+        # Update the weather data every 30 minutes
+        while not self.exit:
+            api_response = self.api_manager.retrieve_api_data(self.city)
+
+            if api_response == "NO_INTERNET_CONNECTION":
+                while api_response == "NO_INTERNET_CONNECTION":
+                    api_response = self.api_manager.retrieve_api_data(self.city)
+                    time.sleep(30)
+            elif api_response == "E400":
+                while api_response == "E400":
+                    api_response = self.api_manager.retrieve_api_data(self.city)
+                    time.sleep(30)
+            elif api_response == "CITY_NOT_FOUND": 
+                self.city = None
+                while self.city == None: pass
+            elif api_response == "COORDINATE_RETRIEVE_FAILED":
+                while api_response == "E400":
+                    api_response = self.api_manager.retrieve_api_data(self.city)
+                    time.sleep(30)
+
+            time.sleep(1800)
+
     def set_city(self, city) -> str:
         # Get coordinates of the city from the api
         api_response = self.api_manager.retrieve_coordinates(city)
@@ -28,3 +54,6 @@ class WeatherManager:
         self.city = city
 
         return "SUCCESS"
+    
+    def get_weather_api(self):
+        return self.api_manager

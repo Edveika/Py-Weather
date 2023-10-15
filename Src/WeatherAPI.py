@@ -13,10 +13,8 @@ class WeatherAPI:
             return False
 
     def retrieve_coordinates(self, city) -> str:
-        if not self.connected_to_internet():
-            return "NO_INTERNET_CONNECTION"
-        
         api_response = requests.get(f"https://geocoding-api.open-meteo.com/v1/search?name={city}")
+        
         if api_response.status_code == 200:
             location_data = json.loads(api_response.text)
             if len(location_data) == 1:
@@ -33,7 +31,7 @@ class WeatherAPI:
             return "NO_INTERNET_CONNECTION"
         
         coord_retrieve_status = self.retrieve_coordinates(city)
-        if coord_retrieve_status == "FAIL":
+        if coord_retrieve_status == "E400":
             return "COORDINATE_RETRIEVE_FAILED"
         elif coord_retrieve_status == "CITY_NOT_FOUND":
             return "CITY_NOT_FOUND"
