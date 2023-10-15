@@ -49,18 +49,46 @@ class WeatherAPI:
     def get_cur_temperature(self) -> float:
         return self.weather_data["current"]["temperature_2m"]
     
+    # Returns current rain amount in mm
+    def get_cur_rain(self) -> float:
+        return self.weather_data["current"]["rain"]
+
+    # Returns preceding hour sum of showers(mm)
+    def get_cur_showers(self) -> float:
+        return self.weather_data["current"]["showers"]
+    
+    # Returns preceding hour sum of snow(cm)
+    def get_cur_snowfall(self) -> float:
+        return self.weather_data["current"]["snowfall"]
+
+    # Returns current % of total cloud cover
+    def get_cur_cloudcover(self) -> int:
+        return self.weather_data["current"]["cloudcover"]
+    
+    # Returns current windspeed
+    def get_cur_windspeed(self) -> float:
+        return self.weather_data["current"]["windspeed_10m"]
+    
+    # Returns wind direction in degrees
+    def get_cur_wind_dir(self) -> float:
+        return self.weather_data["current"]["winddirection_10m"]
+
+    # Returns 1 if day 0 if night
+    def is_day(self) -> bool:
+        return bool(self.weather_data["current"]["is_day"])
+
+    # Returns precipitation
+    def get_cur_precipitation(self):
+        return self.weather_data["current"]["precipitation"]
+    
     # Returns hourly temperature for 7 days from now
     def get_hourly_temperature(self) -> float:
         return self.weather_data["hourly"]["temperature_2m"]
     
-    # Gets rain amount in mm
-    def get_cur_rain(self) -> float:
-        return self.weather_data["current"]["rain"]
-    
-    # Gets hourly rain for 7 days from now
+    # Returns hourly rain for 7 days from now
     def get_hourly_rain(self) -> float:
         return self.weather_data["hourly"]["rain"]
     
-    # Gets chance of precipitation for 7 days from now
+    # Returns chance of precipitation in % for 7 days from now
     def get_hourly_precipitation_probability(self) -> int:
         return self.weather_data["hourly"]["precipitation_probability"]
