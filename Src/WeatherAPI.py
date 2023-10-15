@@ -45,6 +45,10 @@ class WeatherAPI:
         elif api_response.status_code == 400:
             return "FAIL"
     
+    ##
+    ## Current time data
+    ##
+
     # Returns current temperature
     def get_cur_temperature(self) -> float:
         return self.weather_data["current"]["temperature_2m"]
@@ -81,14 +85,46 @@ class WeatherAPI:
     def get_cur_precipitation(self):
         return self.weather_data["current"]["precipitation"]
     
+    ##
+    ## Hourly data 
+    ##
+
+    # Gets date and time for 7 days from now
+    def get_hourly_time(self):
+        return self.weather_data["hourly"]["time"]
+
     # Returns hourly temperature for 7 days from now
     def get_hourly_temperature(self) -> float:
         return self.weather_data["hourly"]["temperature_2m"]
-    
-    # Returns hourly rain for 7 days from now
-    def get_hourly_rain(self) -> float:
+
+    # Returns hourly rain list for 7 days from now
+    def get_hourly_rain(self):
         return self.weather_data["hourly"]["rain"]
     
-    # Returns chance of precipitation in % for 7 days from now
-    def get_hourly_precipitation_probability(self) -> int:
+    # Returns hourly showers list for 7 days from now
+    def get_hourly_showers(self):
+        return self.weather_data["hourly"]["showers"]
+
+    # Returns hourly snowfall list for 7 days from now
+    def get_hourly_snowfall(self):
+        return self.weather_data["hourly"]["snowfall"]
+
+    # Returns hourly cloudcover list for 7 days from now
+    def get_hourly_cloudcover(self):
+        return self.weather_data["hourly"]["cloudcover"]
+    
+    # Returns hourly windspeed list for 7 days from now
+    def get_hourly_windspeed(self):
+        return self.weather_data["hourly"]["windspeed_10m"]
+    
+    # Returns hourly wind direction list for 7 days from now
+    def get_hourly_wind_dir(self):
+        return self.weather_data["hourly"]["winddirection_10m"]
+    
+    # Returns bool is day list for 7 days from now
+    def get_hourly_is_day(self):
+        return self.weather_data["hourly"]["is_day"]
+
+    # Returns chance of precipitation in % list for 7 days from now
+    def get_hourly_precipitation_probability(self):
         return self.weather_data["hourly"]["precipitation_probability"]
