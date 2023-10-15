@@ -26,7 +26,7 @@ class WeatherAPI:
             self.longitude = location_data["results"][0]["longitude"]
             return "SUCCESS"
         elif api_response.status_code == 400:
-            return "FAIL"
+            return "E400"
 
     def retrieve_api_data(self, city) -> str:
         if not self.connected_to_internet():
@@ -44,11 +44,15 @@ class WeatherAPI:
             self.weather_data = json.loads(api_response.text)
             return "SUCCESS"
         elif api_response.status_code == 400:
-            return "FAIL"
+            return "E400"
     
     ##
     ## Current time data
     ##
+
+    # Returns current weather data
+    def get_cur_data(self):
+        return self.weather_data["current"]
 
     # Returns current temperature
     def get_cur_temperature(self) -> float:
@@ -89,6 +93,10 @@ class WeatherAPI:
     ##
     ## Hourly data 
     ##
+
+    # Returns hourly data
+    def get_hourly_data(self):
+        return self.weather_data["hourly"]
 
     # Gets date and time for 7 days from now
     def get_hourly_time(self):
@@ -133,6 +141,10 @@ class WeatherAPI:
     ##
     ## Daily data
     ##
+
+    # Returns daily weather data
+    def get_daily_data(self):
+        return self.weather_data["daily"]
 
     # Returns a list of dates 7 days from now
     def get_daily_time(self):
