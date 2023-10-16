@@ -1,8 +1,6 @@
 from WeatherAPI import WeatherAPI
 import threading
-
 import time
-import os
 
 class WeatherManager:
     def __init__(self) -> None:
