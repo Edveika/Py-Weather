@@ -3,7 +3,7 @@ import json
 
 class WeatherAPI:
     def __init__(self):
-        pass
+        self.weather_data = None
 
     def connected_to_internet(self) -> bool:
         try:
