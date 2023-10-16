@@ -19,11 +19,6 @@ class WeatherManager:
                 # Get data from the API
                 api_response = self.api_manager.retrieve_api_data(self.city)
 
-                # If the city that user chose was not found
-                if api_response == "CITY_NOT_FOUND": 
-                    # Reset city value, user will have to enter it again
-                    self.city = None
-
                 # If there is no internet connection, error 400 was returned on cordinate retrieve failed(error 400 returned in coordinate retrieve function)
                 while api_response == "NO_INTERNET_CONNECTION" or api_response == "E400" or api_response == "COORDINATE_RETRIEVE_FAILED":
                     # Just keep trying to reach the API data, there is not much else we can do
