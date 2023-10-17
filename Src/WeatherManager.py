@@ -25,7 +25,6 @@ class WeatherManager:
                     api_response = self.api_manager.retrieve_api_data(self.city)
                     time.sleep(30)
 
-                print(self.api_manager.get_cur_temperature())
                 # Update the weather data every 60 minutes
                 time.sleep(3600)
             
