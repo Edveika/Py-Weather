@@ -51,8 +51,3 @@ class WeatherManager:
     # Returns API manager that gets updated after x minutes and stores all needed data
     def get_weather_api(self) -> WeatherAPI:
         return self.api_manager
-    
-weather = WeatherManager()
-
-weather.set_city("Kaunas")
-weather.update_weather()
