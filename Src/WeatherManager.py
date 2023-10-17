@@ -1,4 +1,4 @@
-from WeatherAPI import WeatherAPI
+from WeatherAPI import WeatherAPI, Status
 import threading
 import time
 
@@ -20,11 +20,12 @@ class WeatherManager:
                 api_response = self.api_manager.retrieve_api_data(self.city)
 
                 # If there is no internet connection, error 400 was returned on cordinate retrieve failed(error 400 returned in coordinate retrieve function)
-                while api_response == "NO_INTERNET_CONNECTION" or api_response == "E400" or api_response == "COORDINATE_RETRIEVE_FAILED":
+                while api_response == Status.ERROR_NO_INTERNET or api_response == Status.ERROR_400:
                     # Just keep trying to reach the API data, there is not much else we can do
                     api_response = self.api_manager.retrieve_api_data(self.city)
                     time.sleep(30)
 
+                print(self.api_manager.get_cur_temperature())
                 # Update the weather data every 60 minutes
                 time.sleep(3600)
             
@@ -38,15 +39,20 @@ class WeatherManager:
         api_response = self.api_manager.retrieve_coordinates(city)
 
         # If something failed, return the error message
-        if api_response != "SUCCESS":
+        if api_response != Status.SUCCESS:
             return api_response
 
         # If nothing failed and city is valid, set the city name
         self.city = city
 
         # Return success
-        return "SUCCESS"
+        return Status.SUCCESS
     
     # Returns API manager that gets updated after x minutes and stores all needed data
     def get_weather_api(self) -> WeatherAPI:
         return self.api_manager
+    
+weather = WeatherManager()
+
+weather.set_city("Kaunas")
+weather.update_weather()

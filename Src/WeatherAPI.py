@@ -7,7 +7,6 @@ class Status(Enum):
     ERROR_NO_INTERNET = 1
     ERROR_CITY_NOT_FOUND = 2
     ERROR_400 = 3
-    ERROR_DATA_NOT_FOUND = 4
 
 class WeatherAPI:
     def __init__(self):
@@ -46,9 +45,6 @@ class WeatherAPI:
         
         if api_response.status_code == 200:
             self.weather_data = json.loads(api_response.text)
-            if self.weather_data["error"] in self.weather_data and self.weather_data["error"] == True:
-                return Status.ERROR_DATA_NOT_FOUND
-
             return Status.SUCCESS
         elif api_response.status_code == 400:
             return Status.ERROR_400
