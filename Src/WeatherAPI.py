@@ -1,5 +1,13 @@
 import requests
 import json
+from enum import Enum
+
+class Status(Enum):
+    SUCCESS = 0
+    ERROR_NO_INTERNET = 1
+    ERROR_CITY_NOT_FOUND = 2
+    ERROR_400 = 3
+    ERROR_DATA_NOT_FOUND = 4
 
 class WeatherAPI:
     def __init__(self):
@@ -18,31 +26,32 @@ class WeatherAPI:
         if api_response.status_code == 200:
             location_data = json.loads(api_response.text)
             if len(location_data) == 1:
-                return "CITY_NOT_FOUND"
+                return Status.ERROR_CITY_NOT_FOUND
 
             self.latitude = location_data["results"][0]["latitude"]
             self.longitude = location_data["results"][0]["longitude"]
-            return "SUCCESS"
+            return Status.SUCCESS
         elif api_response.status_code == 400:
-            return "E400"
+            return Status.ERROR_400
 
     def retrieve_api_data(self, city) -> str:
         if not self.connected_to_internet():
-            return "NO_INTERNET_CONNECTION"
+            return Status.ERROR_NO_INTERNET
         
-        coord_retrieve_status = self.retrieve_coordinates(city)
-        if coord_retrieve_status == "E400":
-            return "COORDINATE_RETRIEVE_FAILED"
-        elif coord_retrieve_status == "CITY_NOT_FOUND":
-            return "CITY_NOT_FOUND"
-
+        coord_retrieve_response = self.retrieve_coordinates(city)
+        if coord_retrieve_response != Status.SUCCESS:
+            return coord_retrieve_response
+        
         api_response = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude={self.latitude}&longitude={self.longitude}&current=temperature_2m,is_day,precipitation,rain,showers,snowfall,cloudcover,windspeed_10m,winddirection_10m&hourly=temperature_2m,precipitation_probability,rain,showers,snowfall,cloudcover,windspeed_10m,winddirection_10m,is_day&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,rain_sum,showers_sum,snowfall_sum,precipitation_hours,precipitation_probability_max,windspeed_10m_max,winddirection_10m_dominant&timezone=auto")
         
         if api_response.status_code == 200:
             self.weather_data = json.loads(api_response.text)
-            return "SUCCESS"
+            if self.weather_data["error"] in self.weather_data and self.weather_data["error"] == True:
+                return Status.ERROR_DATA_NOT_FOUND
+
+            return Status.SUCCESS
         elif api_response.status_code == 400:
-            return "E400"
+            return Status.ERROR_400
     
     ##
     ## Current time data
