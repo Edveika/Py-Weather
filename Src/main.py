@@ -1,6 +1,6 @@
 from WeatherAPI import WeatherAPI
 from WeatherManager import WeatherManager
-from gui import GUIManager
+from GUIManager import GUIManager
 import threading
 
 def main():
