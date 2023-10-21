@@ -27,9 +27,6 @@ class WeatherManager:
 
                 # Update the weather data every 60 minutes
                 time.sleep(3600)
-            
-            # If user didnt yet select a city set a delay of 1 sec so we dont waste too much resources
-            time.sleep(1)
 
     # Sets location(where we want to see the forecast)
     # Also checks for any potential errors
