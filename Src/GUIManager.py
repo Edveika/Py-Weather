@@ -53,9 +53,9 @@ class GUIManager:
 
     def refresh_weather_data(self, buttton):
         units = self.api_manager.get_current_units()
-
+        
         self.temp_label.set_text("Current temperature: " + str(self.api_manager.get_cur_temperature()) + units["temperature_2m"])
-        self.windspeed_label.set_text("Current wind speed: " + str(self.api_manager.get_cur_windspeed()) + units["cloudcover"])
+        self.windspeed_label.set_text("Current wind speed: " + str(self.api_manager.get_cur_windspeed()) + units["windspeed_10m"])
         self.cloudcover_label.set_text("Current cloud cover: " + str(self.api_manager.get_cur_cloudcover()) + units["cloudcover"])
         self.rain_label.set_text("Current rain: " + str(self.api_manager.get_cur_rain()) + units["rain"])
         self.showers_label.set_text("Current showers: " + str(self.api_manager.get_cur_showers()) + units["showers"])

@@ -50,3 +50,7 @@ class WeatherManager:
     # Returns API manager that gets updated after x minutes and stores all needed data
     def get_weather_api(self) -> WeatherAPI:
         return self.api_manager
+    
+    # When set the Weather manager closes
+    def set_exit_flag(self):
+        self.exit = True
