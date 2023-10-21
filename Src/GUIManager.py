@@ -57,7 +57,6 @@ class GUIManager:
         self.windspeed_label = self.builder.get_object("current_windspeed")
         self.cloudcover_label = self.builder.get_object("current_cloudcover")
         self.rain_label = self.builder.get_object("current_rain")
-        self.showers_label = self.builder.get_object("current_showers")
         self.snow_label = self.builder.get_object("current_snow")
 
         refresh_button = self.builder.get_object("weather_refresh")
@@ -83,9 +82,8 @@ class GUIManager:
         units = self.api_manager.get_current_units()
 
         # Update UI elements
-        self.temp_label.set_text("Current temperature: " + str(self.api_manager.get_cur_temperature()) + units["temperature_2m"])
-        self.windspeed_label.set_text("Current wind speed: " + str(self.api_manager.get_cur_windspeed()) + units["windspeed_10m"])
-        self.cloudcover_label.set_text("Current cloud cover: " + str(self.api_manager.get_cur_cloudcover()) + units["cloudcover"])
-        self.rain_label.set_text("Current rain: " + str(self.api_manager.get_cur_rain()) + units["rain"])
-        self.showers_label.set_text("Current showers: " + str(self.api_manager.get_cur_showers()) + units["showers"])
-        self.snow_label.set_text("Current snow: " + str(self.api_manager.get_cur_snowfall()) + units["snowfall"])
+        self.temp_label.set_text(self.weather_manager.get_city() + ", " + str(self.api_manager.get_cur_temperature()) + units["temperature_2m"])
+        self.windspeed_label.set_text(str(self.api_manager.get_cur_windspeed()) + units["windspeed_10m"])
+        self.cloudcover_label.set_text(str(self.api_manager.get_cur_cloudcover()) + units["cloudcover"])
+        self.rain_label.set_text(str(self.api_manager.get_cur_rain()) + units["rain"])
+        self.snow_label.set_text(str(self.api_manager.get_cur_snowfall()) + units["snowfall"])

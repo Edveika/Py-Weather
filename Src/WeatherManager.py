@@ -52,6 +52,9 @@ class WeatherManager:
     def get_weather_api(self) -> WeatherAPI:
         return self.api_manager
     
+    def get_city(self) -> str:
+        return self.city
+
     # When set the Weather Manager exits
     def set_exit_flag(self):
         self.exit = True

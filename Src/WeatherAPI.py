@@ -189,7 +189,7 @@ class WeatherAPI:
     def get_daily_sunset(self):
         return self.weather_data["daily"]["sunset"]
     
-    # Returns a list of daily sunrise time
+    # Returns a list of daily precipitationsum
     def get_daily_precipitation_sum(self):
         return self.weather_data["daily"]["precipitation_sum"]
     
