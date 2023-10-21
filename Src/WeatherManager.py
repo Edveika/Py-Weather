@@ -17,16 +17,20 @@ class WeatherManager:
             # If the user chose a city
             if self.city != None:
                 # Get data from the API
-                api_response = self.api_manager.retrieve_api_data(self.city)
+                api_response = self.get_new_weather_data()
 
                 # If there is no internet connection, error 400 was returned on cordinate retrieve failed(error 400 returned in coordinate retrieve function)
                 while api_response == Status.ERROR_NO_INTERNET or api_response == Status.ERROR_400:
                     # Just keep trying to reach the API data, there is not much else we can do
-                    api_response = self.api_manager.retrieve_api_data(self.city)
+                    api_response = self.get_new_weather_data()
                     time.sleep(30)
 
                 # Update the weather data every 60 minutes
                 time.sleep(3600)
+
+    # Gets new data from the API
+    def get_new_weather_data(self):
+        return self.api_manager.retrieve_api_data(self.city)
 
     # Sets location(where we want to see the forecast)
     # Also checks for any potential errors
@@ -51,3 +55,13 @@ class WeatherManager:
     # When set the Weather Manager exits
     def set_exit_flag(self):
         self.exit = True
+
+    # Checks if city is already set
+    # True - set
+    # False - None
+    def city_is_set(self) -> bool:
+        return False if self.city is None else True
+    
+    # Checks if data was received from the API
+    def data_received(self) -> bool:
+        return False if self.get_weather_api().have_data() is None else True

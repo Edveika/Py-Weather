@@ -54,6 +54,9 @@ class WeatherAPI:
         elif api_response.status_code == 400:
             return Status.ERROR_400
     
+    def have_data(self) -> bool:
+        return False if self.weather_data is None else True
+
     ##
     ## Current time data
     ##

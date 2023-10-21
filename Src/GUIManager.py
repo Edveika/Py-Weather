@@ -4,7 +4,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 from WeatherAPI import WeatherAPI, Status
 from WeatherManager import WeatherManager
-import os
+import time
 
 class GUIManager:
     # Stores reference to weather manager inside self
@@ -21,6 +21,10 @@ class GUIManager:
 
         # Ask user to input a city
         self.city_input_window()
+
+        # If the city is not set and data is not received, wait because we cant display anything
+        while not self.weather_manager.city_is_set() and not self.weather_manager.data_received():
+            time.sleep(1)
 
     # City input window
     # Simply gets input from the user, checks if city was found
@@ -59,16 +63,26 @@ class GUIManager:
         refresh_button = self.builder.get_object("weather_refresh")
         refresh_button.connect("clicked", self.manual_data_refresh)
 
+        # Update weather data and GUI elements for the first time when data is retrieved and city is set
+        self.weather_manager.get_new_weather_data()
+        self.current_data_refresh()
+
         Gtk.main()
 
     # When refresh button is pressed, new data gets pulled from the API
     def manual_data_refresh(self, buttton):
+        # Get new weather data
+        # TODO: do it in other thread, so the UI doesnt freeze
+        self.weather_manager.get_new_weather_data()
+
+        # Update UI elements
         self.current_data_refresh()
 
     def current_data_refresh(self):
         # Current weather data measurements
         units = self.api_manager.get_current_units()
 
+        # Update UI elements
         self.temp_label.set_text("Current temperature: " + str(self.api_manager.get_cur_temperature()) + units["temperature_2m"])
         self.windspeed_label.set_text("Current wind speed: " + str(self.api_manager.get_cur_windspeed()) + units["windspeed_10m"])
         self.cloudcover_label.set_text("Current cloud cover: " + str(self.api_manager.get_cur_cloudcover()) + units["cloudcover"])
