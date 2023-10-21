@@ -57,6 +57,10 @@ class WeatherAPI:
     def get_cur_data(self):
         return self.weather_data["current"]
 
+    # Returns units of current weather data
+    def get_current_units(self):
+        return self.weather_data["current_units"]
+
     # Returns current temperature
     def get_cur_temperature(self) -> float:
         return self.weather_data["current"]["temperature_2m"]
@@ -100,6 +104,10 @@ class WeatherAPI:
     # Returns hourly data
     def get_hourly_data(self):
         return self.weather_data["hourly"]
+
+    # Returns units of hourly weather data
+    def get_hourly_units(self):
+        return self.weather_data["hourly_units"]
 
     # Gets date and time for 7 days from now
     def get_hourly_time(self):
@@ -148,6 +156,10 @@ class WeatherAPI:
     # Returns daily weather data
     def get_daily_data(self):
         return self.weather_data["daily"]
+
+    # Returns units of daily weather data
+    def get_daily_units(self):
+        return self.weather_data["daily_units"]
 
     # Returns a list of dates 7 days from now
     def get_daily_time(self):
