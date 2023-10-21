@@ -12,6 +12,9 @@ class WeatherAPI:
     def __init__(self):
         self.weather_data = None
 
+    # Checks if the user is conntected to the internet by pinging google
+    # True = connected to the internet
+    # False = no internet
     def connected_to_internet(self) -> bool:
         try:
             response = requests.get("http://www.google.com", timeout=5)
@@ -19,6 +22,7 @@ class WeatherAPI:
         except requests.ConnectionError:
             return False
 
+    # Retrieves coordinates of a city by using geocoding API
     def retrieve_coordinates(self, city) -> str:
         api_response = requests.get(f"https://geocoding-api.open-meteo.com/v1/search?name={city}")
         
@@ -33,6 +37,7 @@ class WeatherAPI:
         elif api_response.status_code == 400:
             return Status.ERROR_400
 
+    # Retrieves weather data for selected city using open-meteo API
     def retrieve_api_data(self, city) -> str:
         if not self.connected_to_internet():
             return Status.ERROR_NO_INTERNET

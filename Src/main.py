@@ -15,11 +15,10 @@ def main():
     gui_manager = GUIManager(weather_manager)
     gui_manager.main_window()
 
-    # set exit flag to stop weather manager when window closed
+    # set exit flag to stop weather manager when main window is closed
     weather_manager.set_exit_flag()
 
     # Wait for the weather manager to close and exit the program
     wm_thread.join()
-
 
 main()

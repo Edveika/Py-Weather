@@ -28,7 +28,7 @@ class WeatherManager:
                 # Update the weather data every 60 minutes
                 time.sleep(3600)
             
-            # So we dont waste too much resources
+            # If user didnt yet select a city set a delay of 1 sec so we dont waste too much resources
             time.sleep(1)
 
     # Sets location(where we want to see the forecast)
@@ -51,6 +51,6 @@ class WeatherManager:
     def get_weather_api(self) -> WeatherAPI:
         return self.api_manager
     
-    # When set the Weather manager closes
+    # When set the Weather Manager exits
     def set_exit_flag(self):
         self.exit = True

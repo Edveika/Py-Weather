@@ -7,15 +7,23 @@ from WeatherManager import WeatherManager
 import os
 
 class GUIManager:
+    # Stores reference to weather manager inside self
+    # Loads GUI .glade file
+    # Asks user to input a city
     def __init__(self, weather_manager):
+        # Reference to weather and api managers
         self.weather_manager = weather_manager
         self.api_manager = weather_manager.get_weather_api()
 
+        # Create GtkBuilder instance and load .glade file
         self.builder = Gtk.Builder()
-        self.builder.add_from_file("Py-Weather-GUI.glade")
+        self.builder.add_from_file("GUI/Py-Weather-GUI.glade")
 
+        # Ask user to input a city
         self.city_input_window()
 
+    # City input window
+    # Simply gets input from the user, checks if city was found
     def city_input_window(self):
         input_window = self.builder.get_object("city_input_window")
         input_window.show_all()
@@ -35,6 +43,8 @@ class GUIManager:
 
         Gtk.main()
 
+    # The main window of the application
+    # Shows weather data that was retrieved from open-meteo API of the city that the user chose
     def main_window(self):
         window = self.builder.get_object("main_window")
         window.show_all()
@@ -47,13 +57,18 @@ class GUIManager:
         self.snow_label = self.builder.get_object("current_snow")
 
         refresh_button = self.builder.get_object("weather_refresh")
-        refresh_button.connect("clicked", self.refresh_weather_data)
+        refresh_button.connect("clicked", self.manual_data_refresh)
 
         Gtk.main()
 
-    def refresh_weather_data(self, buttton):
+    # When refresh button is pressed, new data gets pulled from the API
+    def manual_data_refresh(self, buttton):
+        self.current_data_refresh()
+
+    def current_data_refresh(self):
+        # Current weather data measurements
         units = self.api_manager.get_current_units()
-        
+
         self.temp_label.set_text("Current temperature: " + str(self.api_manager.get_cur_temperature()) + units["temperature_2m"])
         self.windspeed_label.set_text("Current wind speed: " + str(self.api_manager.get_cur_windspeed()) + units["windspeed_10m"])
         self.cloudcover_label.set_text("Current cloud cover: " + str(self.api_manager.get_cur_cloudcover()) + units["cloudcover"])
