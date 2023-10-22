@@ -985,7 +985,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkScrolledWindow">
+              <object class="GtkScrolledWindow" id="hourly_weather_scroll_window">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="hexpand">True</property>
@@ -994,12 +994,12 @@
                 <property name="vscrollbar-policy">never</property>
                 <property name="shadow-type">in</property>
                 <child>
-                  <object class="GtkViewport">
+                  <object class="GtkViewport" id="hourly_weather_viewport">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <child>
                       <!-- n-columns=24 n-rows=1 -->
-                      <object class="GtkGrid">
+                      <object class="GtkGrid" id="hourly_grid">
                         <property name="width-request">180</property>
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
@@ -1008,7 +1008,7 @@
                         <property name="border-width">10</property>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly0">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -1020,7 +1020,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly0">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -1031,7 +1031,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_rain_prob">
+                              <object class="GtkLabel" id="hourly_rain_prob0">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_rain_prob</property>
@@ -1042,7 +1042,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_windspeed">
+                              <object class="GtkLabel" id="hourly_windspeed0">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_windspeed</property>
@@ -1053,7 +1053,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover">
+                              <object class="GtkLabel" id="hourly_cloudcover0">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -1064,7 +1064,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_snow">
+                              <object class="GtkLabel" id="hourly_snow0">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_snow</property>
@@ -1075,7 +1075,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_rain">
+                              <object class="GtkLabel" id="hourly_rain0">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_rain</property>
@@ -1086,7 +1086,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_temp">
+                              <object class="GtkLabel" id="hourly_temp0">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_temp</property>
@@ -1097,7 +1097,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_time">
+                              <object class="GtkLabel" id="hourly_time0">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">time</property>
@@ -1115,7 +1115,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly1">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -1127,7 +1127,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly1">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -1160,7 +1160,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover1">
+                              <object class="GtkLabel" id="hourly_cloudcover1">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -1222,7 +1222,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly2">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -1234,7 +1234,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly2">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -1267,7 +1267,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover2">
+                              <object class="GtkLabel" id="hourly_cloudcover2">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -1329,7 +1329,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly3">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -1341,7 +1341,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly3">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -1374,7 +1374,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover3">
+                              <object class="GtkLabel" id="hourly_cloudcover3">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -1436,7 +1436,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly4">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -1448,7 +1448,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly4">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -1481,7 +1481,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover4">
+                              <object class="GtkLabel" id="hourly_cloudcover4">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -1543,7 +1543,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly5">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -1555,7 +1555,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly5">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -1588,7 +1588,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover5">
+                              <object class="GtkLabel" id="hourly_cloudcover5">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -1650,7 +1650,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly6">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -1662,7 +1662,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly6">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -1695,7 +1695,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover6">
+                              <object class="GtkLabel" id="hourly_cloudcover6">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -1757,7 +1757,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly7">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -1769,7 +1769,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly7">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -1802,7 +1802,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover7">
+                              <object class="GtkLabel" id="hourly_cloudcover7">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -1864,7 +1864,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly8">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -1876,7 +1876,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly8">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -1909,7 +1909,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover8">
+                              <object class="GtkLabel" id="hourly_cloudcover8">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -1971,7 +1971,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly9">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -1983,7 +1983,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly9">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -2016,7 +2016,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover9">
+                              <object class="GtkLabel" id="hourly_cloudcover9">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -2078,7 +2078,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly10">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -2090,7 +2090,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly10">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -2123,7 +2123,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover10">
+                              <object class="GtkLabel" id="hourly_cloudcover10">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -2185,7 +2185,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly11">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -2197,7 +2197,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly11">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -2230,7 +2230,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover11">
+                              <object class="GtkLabel" id="hourly_cloudcover11">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -2292,7 +2292,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly12">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -2304,7 +2304,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly12">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -2337,7 +2337,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover12">
+                              <object class="GtkLabel" id="hourly_cloudcover12">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -2399,7 +2399,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly13">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -2411,7 +2411,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly13">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -2444,7 +2444,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover13">
+                              <object class="GtkLabel" id="hourly_cloudcover13">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -2506,7 +2506,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly14">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -2518,7 +2518,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly14">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -2551,7 +2551,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover14">
+                              <object class="GtkLabel" id="hourly_cloudcover14">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -2613,7 +2613,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly15">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -2625,7 +2625,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly15">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -2658,7 +2658,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover15">
+                              <object class="GtkLabel" id="hourly_cloudcover15">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -2720,7 +2720,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly16">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -2732,7 +2732,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly16">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -2765,7 +2765,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover16">
+                              <object class="GtkLabel" id="hourly_cloudcover16">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -2827,7 +2827,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly17">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -2839,7 +2839,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly17">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -2872,7 +2872,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover17">
+                              <object class="GtkLabel" id="hourly_cloudcover17">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -2934,7 +2934,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly18">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -2946,7 +2946,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly18">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -2979,7 +2979,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover18">
+                              <object class="GtkLabel" id="hourly_cloudcover18">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -3041,7 +3041,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly19">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -3053,7 +3053,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly19">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -3086,7 +3086,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover19">
+                              <object class="GtkLabel" id="hourly_cloudcover19">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -3148,7 +3148,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly20">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -3160,7 +3160,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly20">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -3193,7 +3193,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover20">
+                              <object class="GtkLabel" id="hourly_cloudcover20">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -3255,7 +3255,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly21">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -3267,7 +3267,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly21">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -3300,7 +3300,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover21">
+                              <object class="GtkLabel" id="hourly_cloudcover21">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -3362,7 +3362,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly22">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -3374,7 +3374,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly22">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -3407,7 +3407,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover22">
+                              <object class="GtkLabel" id="hourly_cloudcover22">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>
@@ -3469,7 +3469,7 @@
                         </child>
                         <child>
                           <!-- n-columns=1 n-rows=8 -->
-                          <object class="GtkGrid">
+                          <object class="GtkGrid" id="grid_hourly23">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="margin-start">10</property>
@@ -3481,7 +3481,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkImage" id="icon_hourly23">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="stock">gtk-missing-image</property>
@@ -3514,7 +3514,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="hourly_ cloudcover23">
+                              <object class="GtkLabel" id="hourly_cloudcover23">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">hourly_ cloudcover</property>

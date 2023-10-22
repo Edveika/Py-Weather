@@ -65,7 +65,9 @@ class GUIManager:
         # Update weather data and GUI elements for the first time when data is retrieved and city is set
         self.weather_manager.get_new_weather_data()
         self.current_data_refresh()
-
+        self.hourly_data_refresh()
+        self.daily_data_refresh()
+        
         Gtk.main()
 
     # When refresh button is pressed, new data gets pulled from the API
@@ -76,6 +78,7 @@ class GUIManager:
 
         # Update UI elements
         self.current_data_refresh()
+        self.hourly_data_refresh()
         self.daily_data_refresh()
 
     def current_data_refresh(self):
@@ -90,8 +93,30 @@ class GUIManager:
         self.snow_label.set_text(str(self.api_manager.get_cur_snowfall()) + units["snowfall"])
 
     def hourly_data_refresh(self):
+        units = self.api_manager.get_hourly_units()
+
         for index in range(24):
-            pass
+            time = str(self.api_manager.get_hourly_time()[index])
+            self.builder.get_object("hourly_time" + str(index)).set_text(time.split("T")[1])
+
+            temperature = str(self.api_manager.get_hourly_temperature()[index]) + units["temperature_2m"]
+            self.builder.get_object("hourly_temp" + str(index)).set_text("Temp: " + temperature)
+
+            rain = str(self.api_manager.get_hourly_rain()[index]) + units["rain"]
+            self.builder.get_object("hourly_rain" + str(index)).set_text("Rain: " + rain)
+            
+            snow = str(self.api_manager.get_hourly_snowfall()[index]) + units["snowfall"]
+            self.builder.get_object("hourly_snow" + str(index)).set_text("Snow: " + snow)
+
+            cloudcover = str(self.api_manager.get_hourly_cloudcover()[index]) + units["cloudcover"]
+            self.builder.get_object("hourly_cloudcover" + str(index)).set_text("Cloudcover: " + cloudcover)
+
+            windspeed = str(self.api_manager.get_hourly_windspeed()[index]) + units["windspeed_10m"]
+            self.builder.get_object("hourly_windspeed" + str(index)).set_text("Wind: " + windspeed)
+
+            precipitation_prob = str(self.api_manager.get_hourly_precipitation_probability()[index]) + units["precipitation_probability"]
+            self.builder.get_object("hourly_rain_prob" + str(index)).set_text("Precip prob: " + precipitation_prob)
+            
 
     def daily_data_refresh(self):
         units = self.api_manager.get_daily_units()
