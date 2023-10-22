@@ -39,18 +39,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="city_window_error">
-            <property name="can-focus">False</property>
-            <property name="label" translatable="yes">Error message</property>
-            <attributes>
-              <attribute name="foreground" value="#f6f6d3d32d2d"/>
-            </attributes>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
-          </packing>
+          <placeholder/>
         </child>
       </object>
     </child>
@@ -1107,6 +1096,9 @@
                                 <property name="top-attach">1</property>
                               </packing>
                             </child>
+                            <style>
+                              <class name="color=red"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="left-attach">0</property>

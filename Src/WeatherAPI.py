@@ -24,6 +24,9 @@ class WeatherAPI:
 
     # Retrieves coordinates of a city by using geocoding API
     def retrieve_coordinates(self, city) -> str:
+        if not self.connected_to_internet():
+            return Status.ERROR_NO_INTERNET
+        
         api_response = requests.get(f"https://geocoding-api.open-meteo.com/v1/search?name={city}")
         
         if api_response.status_code == 200:
