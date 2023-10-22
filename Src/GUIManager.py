@@ -53,21 +53,14 @@ class GUIManager:
         window = self.builder.get_object("main_window")
         window.show_all()
 
-        self.temp_label = self.builder.get_object("current_temperature")
-        self.windspeed_label = self.builder.get_object("current_windspeed")
-        self.cloudcover_label = self.builder.get_object("current_cloudcover")
-        self.rain_label = self.builder.get_object("current_rain")
-        self.snow_label = self.builder.get_object("current_snow")
-
-        refresh_button = self.builder.get_object("weather_refresh")
-        refresh_button.connect("clicked", self.manual_data_refresh)
+        self.builder.get_object("weather_refresh").connect("clicked", self.manual_data_refresh)
 
         # Update weather data and GUI elements for the first time when data is retrieved and city is set
         self.weather_manager.get_new_weather_data()
         self.current_data_refresh()
         self.hourly_data_refresh()
         self.daily_data_refresh()
-        
+
         Gtk.main()
 
     # When refresh button is pressed, new data gets pulled from the API
@@ -81,17 +74,26 @@ class GUIManager:
         self.hourly_data_refresh()
         self.daily_data_refresh()
 
+    # Updates the GUI data of current weather
     def current_data_refresh(self):
-        # Current weather data measurements
         units = self.api_manager.get_current_units()
 
-        # Update UI elements
-        self.temp_label.set_text(self.weather_manager.get_city() + ", " + str(self.api_manager.get_cur_temperature()) + units["temperature_2m"])
-        self.windspeed_label.set_text(str(self.api_manager.get_cur_windspeed()) + units["windspeed_10m"])
-        self.cloudcover_label.set_text(str(self.api_manager.get_cur_cloudcover()) + units["cloudcover"])
-        self.rain_label.set_text(str(self.api_manager.get_cur_rain()) + units["rain"])
-        self.snow_label.set_text(str(self.api_manager.get_cur_snowfall()) + units["snowfall"])
+        city_temp = self.weather_manager.get_city() + ", " + str(round(self.api_manager.get_cur_temperature())) + units["temperature_2m"]
+        self.builder.get_object("current_temperature").set_text(city_temp)
 
+        cur_windspeed = str(self.api_manager.get_cur_windspeed()) + units["windspeed_10m"]
+        self.builder.get_object("current_windspeed").set_text(cur_windspeed)
+
+        cur_cloudcover = str(self.api_manager.get_cur_cloudcover()) + units["cloudcover"]
+        self.builder.get_object("current_cloudcover").set_text(cur_cloudcover)
+
+        cur_rain = str(self.api_manager.get_cur_rain()) + units["rain"]
+        self.builder.get_object("current_rain").set_text(cur_rain)
+
+        cur_snow = str(self.api_manager.get_cur_snowfall()) + units["snowfall"]
+        self.builder.get_object("current_snow").set_text(cur_snow)
+
+    # Updates the GUI data of hourly weather forecast
     def hourly_data_refresh(self):
         units = self.api_manager.get_hourly_units()
 
@@ -117,7 +119,7 @@ class GUIManager:
             precipitation_prob = str(self.api_manager.get_hourly_precipitation_probability()[index]) + units["precipitation_probability"]
             self.builder.get_object("hourly_rain_prob" + str(index)).set_text("Precip prob: " + precipitation_prob)
             
-
+    # Updates the GUI data of daily weather forecast
     def daily_data_refresh(self):
         units = self.api_manager.get_daily_units()
 
