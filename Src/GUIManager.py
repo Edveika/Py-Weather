@@ -76,6 +76,7 @@ class GUIManager:
 
         # Update UI elements
         self.current_data_refresh()
+        self.daily_data_refresh()
 
     def current_data_refresh(self):
         # Current weather data measurements
@@ -87,3 +88,35 @@ class GUIManager:
         self.cloudcover_label.set_text(str(self.api_manager.get_cur_cloudcover()) + units["cloudcover"])
         self.rain_label.set_text(str(self.api_manager.get_cur_rain()) + units["rain"])
         self.snow_label.set_text(str(self.api_manager.get_cur_snowfall()) + units["snowfall"])
+
+    def hourly_data_refresh(self):
+        for index in range(24):
+            pass
+
+    def daily_data_refresh(self):
+        units = self.api_manager.get_daily_units()
+
+        for index in range(7):
+            windspeed = str(self.api_manager.get_daily_windspeed_max()[index]) + units["windspeed_10m_max"]
+            self.builder.get_object("windspeed_daily" + str(index)).set_text("Wind: " + windspeed)
+            
+            precipitation_prob = str(self.api_manager.get_daily_precipitation_probability_max()[index]) + units["precipitation_probability_max"]
+            self.builder.get_object("rain_prob_daily" + str(index)).set_text("Precip prob: " + precipitation_prob)
+
+            precipitation_sum = str(self.api_manager.get_daily_precipitation_sum()[index]) + units["precipitation_sum"]
+            self.builder.get_object("precipitation_sum_daily" + str(index)).set_text("Precip sum: " + precipitation_sum)
+
+            sunset = str(self.api_manager.get_daily_sunset()[index])
+            self.builder.get_object("sunset_daily" + str(index)).set_text("Sunset: " + sunset.split("T")[1])
+
+            sunrise = str(self.api_manager.get_daily_sunrise()[index])
+            self.builder.get_object("sunrise_daily" + str(index)).set_text("Sunrise: " + sunrise.split("T")[1])
+
+            temp_max = str(self.api_manager.get_daily_temperature_max()[index]) + units["temperature_2m_max"]
+            self.builder.get_object("temp_max_daily" + str(index)).set_text("Max temp: " + temp_max)
+
+            temp_min = str(self.api_manager.get_daily_temperature_min()[index]) + units["temperature_2m_min"]
+            self.builder.get_object("temp_min_daily" + str(index)).set_text("Min temp: " + temp_min)
+
+            date = str(self.api_manager.get_daily_time()[index])
+            self.builder.get_object("daily_date_daily" + str(index)).set_text(date)
