@@ -32,6 +32,8 @@ class GUIManager:
         input_window = self.builder.get_object("city_input_window")
         input_window.show_all()
 
+        input_window.connect("destroy", Gtk.main_quit)
+
         input_box = self.builder.get_object("city_name_input")
 
         weather_manager = self.weather_manager
@@ -52,6 +54,8 @@ class GUIManager:
     def main_window(self):
         window = self.builder.get_object("main_window")
         window.show_all()
+
+        window.connect("destroy", Gtk.main_quit)
 
         self.builder.get_object("weather_refresh").connect("clicked", self.manual_data_refresh)
 

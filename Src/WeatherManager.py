@@ -7,6 +7,9 @@ class WeatherManager:
         self.city = None
         self.exit = False
         self.api_manager = WeatherAPI()
+        self.start_time = time.time()
+        # Initialized to 3600 so it updates on launch
+        self.wait_time = 3600
 
     # Mainloop of this program
     # Updates weather data
@@ -16,17 +19,25 @@ class WeatherManager:
         while not self.exit:
             # If the user chose a city
             if self.city != None:
-                # Get data from the API
-                api_response = self.get_new_weather_data()
-
-                # If there is no internet connection, error 400 was returned on cordinate retrieve failed(error 400 returned in coordinate retrieve function)
-                while api_response == Status.ERROR_NO_INTERNET or api_response == Status.ERROR_400:
-                    # Just keep trying to reach the API data, there is not much else we can do
+                # Updates every 60 minutes
+                if self.wait_time >= 3600:
+                    # Get data from the API
                     api_response = self.get_new_weather_data()
-                    time.sleep(30)
 
-                # Update the weather data every 60 minutes
-                time.sleep(3600)
+                    # If there is no internet connection, error 400 was returned on cordinate retrieve failed(error 400 returned in coordinate retrieve function)
+                    while api_response == Status.ERROR_NO_INTERNET or api_response == Status.ERROR_400:
+                        # Just keep trying to reach the API data, there is not much else we can do
+                        api_response = self.get_new_weather_data()
+                        time.sleep(30)
+                    
+                    # Reset the start timer to current time
+                    self.start_time = time.time()
+
+                # Get current time
+                cur_time = time.time()
+
+                # Get wait time
+                self.wait_time = cur_time - self.start_time
 
     # Gets new data from the API
     def get_new_weather_data(self):

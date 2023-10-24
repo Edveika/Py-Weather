@@ -11,14 +11,11 @@ def main():
     wm_thread = threading.Thread(target=weather_manager.update_weather)
     wm_thread.start()
 
-    # Creation of GUI manager obj
+    # Creation of GUI manager object
     gui_manager = GUIManager(weather_manager)
     gui_manager.main_window()
 
-    # set exit flag to stop weather manager when main window is closed
+    # Set exit flag to stop weather manager when main window is closed, exit the app
     weather_manager.set_exit_flag()
-
-    # Wait for the weather manager to close and exit the program
-    wm_thread.join()
 
 main()
