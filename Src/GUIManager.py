@@ -1,7 +1,7 @@
 import gi
 # If multiple versions of GTK installed, make sure 3.0 is installed as well
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, GdkPixbuf
 from WeatherAPI import WeatherAPI, Status
 from WeatherManager import WeatherManager
 import time
@@ -54,10 +54,21 @@ class GUIManager:
     def main_window(self):
         window = self.builder.get_object("main_window")
         window.show_all()
-
         window.connect("destroy", Gtk.main_quit)
 
         self.builder.get_object("weather_refresh").connect("clicked", self.manual_data_refresh)
+
+        current_wind = self.builder.get_object("current_windspeed_icon")
+        self.load_icon(current_wind, "Assets/Icons/wind.png", 30, 30)
+
+        current_cloud = self.builder.get_object("current_cloudcover_icon")
+        self.load_icon(current_cloud, "Assets/Icons/cloud.png", 30, 30)
+
+        current_rain = self.builder.get_object("current_rain_icon")
+        self.load_icon(current_rain, "Assets/Icons/rain.png", 30, 30)
+
+        current_snow = self.builder.get_object("current_snow_icon")
+        self.load_icon(current_snow, "Assets/Icons/snow.png", 30, 30)
 
         # Update weather data and GUI elements for the first time when data is retrieved and city is set
         self.weather_manager.get_new_weather_data()
@@ -151,3 +162,12 @@ class GUIManager:
 
             date = str(self.api_manager.get_daily_time()[index])
             self.builder.get_object("daily_date_daily" + str(index)).set_text(date)
+
+    def load_icon(self, image, image_file, width, height):
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file(image_file)
+
+        # Resize the image
+        pixbuf = pixbuf.scale_simple(width, height, GdkPixbuf.InterpType.BILINEAR)
+
+        # Set the resized image as the source of the GtkImage widget
+        image.set_from_pixbuf(pixbuf)
