@@ -9,6 +9,7 @@ This is a simple weather application written in Python that uses PyGTK for GUI(G
   * Current weather data
   * Hourly forecast
   * Daily forecast
+* City picker - you can choose any city you want once you start the program
 * GTK Graphical User Interface
 * Manual data refresh - you can update weather information by clicking a button
 * Automatic weather data update - new data gets pulled from the API every 60 minutes
