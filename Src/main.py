@@ -1,4 +1,3 @@
-from WeatherAPI import WeatherAPI
 from WeatherManager import WeatherManager
 from GUIManager import GUIManager
 import threading
