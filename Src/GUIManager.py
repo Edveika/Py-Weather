@@ -12,6 +12,9 @@ class GUIManager:
     # Loads GUI .glade file
     # Asks user to input a city
     def __init__(self, weather_manager):
+        # Exit flag for GUI element auto-update
+        self.exit = False
+
         # Reference to weather and api managers
         self.weather_manager = weather_manager
         self.api_manager = weather_manager.get_weather_api()
@@ -23,12 +26,15 @@ class GUIManager:
         # Ask user to input a city
         self.city_input_window()
 
-        # If the city is not set and data is not received, wait because we cant display anything
+        # If the city is not set or data is not received, wait because we cant display anything
         while not self.weather_manager.city_is_set() or not self.weather_manager.data_received():
             time.sleep(1)
 
-        # Update the GUI elements once the data is retrieved
-        self.update_elements()
+        refresh_thread = threading.Thread(target=self.automatic_data_refresh)
+        refresh_thread.start()
+
+        # # Update the GUI elements once the data is retrieved
+        # self.update_elements()
 
     # City input window
     # Simply gets input from the user, checks if city was found
@@ -69,9 +75,29 @@ class GUIManager:
         self.load_hourly_icons()
 
         Gtk.main()
+        # Tells the auto data refresh function to return, so we can exit out of the program properly
+        self.exit = True
 
+    # Updates GUI elements every 60 minutes
+    # Updates only GUI because weather manager updates the data every 60 minutes, so doing it here is not needed
     def automatic_data_refresh(self):
-        pass
+        start_time = time.time()
+        # Set to 3660 so it updates on launch
+        ellapsed_time = 3610
+
+        # If exit flag is set, the loop will close, function will return
+        while not self.exit:
+             # Every 60 minutes
+             # We give some extra time in case the data was not retrieved
+             # TODO: add update time in weather manager, so this is not hardcoded
+             if ellapsed_time >= 3610:
+                 # Update the gui and reset time
+                 self.update_elements()
+                 start_time = time.time()
+
+             # Get cur time to check how much time has passed
+             cur_time = time.time()
+             ellapsed_time = cur_time - start_time
 
     # TODO: prevent user from spamming refresh
     # When refresh button is pressed, new data gets pulled from the API
@@ -159,6 +185,7 @@ class GUIManager:
         self.hourly_data_refresh()
         self.daily_data_refresh()
 
+    # Updates GUI elements AND weather data
     def update_all(self):
         self.weather_manager.get_new_weather_data()
         self.update_elements()
