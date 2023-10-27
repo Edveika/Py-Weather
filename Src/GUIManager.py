@@ -27,6 +27,7 @@ class GUIManager:
         while not self.weather_manager.city_is_set() or not self.weather_manager.data_received():
             time.sleep(1)
 
+        # Update the GUI elements once the data is retrieved
         self.update_elements()
 
     # City input window
@@ -69,10 +70,14 @@ class GUIManager:
 
         Gtk.main()
 
+    def automatic_data_refresh(self):
+        pass
+
+    # TODO: prevent user from spamming refresh
     # When refresh button is pressed, new data gets pulled from the API
     def manual_data_refresh(self, buttton):
-        if not self.update_thread.is_alive():
-            self.update_thread.start()
+        update_thread = threading.Thread(target=self.update_all)
+        update_thread.start()
         
     # Updates the GUI data of current weather
     def current_data_refresh(self):
@@ -153,6 +158,10 @@ class GUIManager:
         self.current_data_refresh()
         self.hourly_data_refresh()
         self.daily_data_refresh()
+
+    def update_all(self):
+        self.weather_manager.get_new_weather_data()
+        self.update_elements()
 
     # Loads image into GtkImage object and resizes it
     def load_icon(self, image, image_file, width, height):
