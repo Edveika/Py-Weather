@@ -4,6 +4,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GdkPixbuf
 from WeatherAPI import WeatherAPI, Status
 from WeatherManager import WeatherManager
+import threading
 import time
 
 class GUIManager:
@@ -23,8 +24,10 @@ class GUIManager:
         self.city_input_window()
 
         # If the city is not set and data is not received, wait because we cant display anything
-        while not self.weather_manager.city_is_set() and not self.weather_manager.data_received():
+        while not self.weather_manager.city_is_set() or not self.weather_manager.data_received():
             time.sleep(1)
+
+        self.update_elements()
 
     # City input window
     # Simply gets input from the user, checks if city was found
@@ -52,17 +55,13 @@ class GUIManager:
     # The main window of the application
     # Shows weather data that was retrieved from open-meteo API of the city that the user chose
     def main_window(self):
+        # Create new window
         window = self.builder.get_object("main_window")
         window.show_all()
         window.connect("destroy", Gtk.main_quit)
 
+        # Refresh button pulls new data from the API and updates the GUI
         self.builder.get_object("weather_refresh").connect("clicked", self.manual_data_refresh)
-
-        # Update weather data and GUI elements for the first time when data is retrieved and city is set
-        self.weather_manager.get_new_weather_data()
-        self.current_data_refresh()
-        self.hourly_data_refresh()
-        self.daily_data_refresh()
 
         # Load the icons
         self.load_cur_data_icon()
@@ -72,15 +71,9 @@ class GUIManager:
 
     # When refresh button is pressed, new data gets pulled from the API
     def manual_data_refresh(self, buttton):
-        # Get new weather data
-        # TODO: do it in other thread, so the UI doesnt freeze
-        self.weather_manager.get_new_weather_data()
-
-        # Update UI elements
-        self.current_data_refresh()
-        self.hourly_data_refresh()
-        self.daily_data_refresh()
-
+        if not self.update_thread.is_alive():
+            self.update_thread.start()
+        
     # Updates the GUI data of current weather
     def current_data_refresh(self):
         units = self.api_manager.get_current_units()
@@ -154,6 +147,12 @@ class GUIManager:
 
             date = str(self.api_manager.get_daily_time()[index])
             self.builder.get_object("daily_date_daily" + str(index)).set_text(date)
+
+    # Updates all GUI elements
+    def update_elements(self):
+        self.current_data_refresh()
+        self.hourly_data_refresh()
+        self.daily_data_refresh()
 
     # Loads image into GtkImage object and resizes it
     def load_icon(self, image, image_file, width, height):

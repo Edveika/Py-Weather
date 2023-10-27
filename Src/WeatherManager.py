@@ -78,4 +78,4 @@ class WeatherManager:
     
     # Checks if data was received from the API
     def data_received(self) -> bool:
-        return False if self.get_weather_api().have_data() is None else True
+        return False if not self.get_weather_api().have_data() else True
