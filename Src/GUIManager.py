@@ -58,13 +58,15 @@ class GUIManager:
 
         self.builder.get_object("weather_refresh").connect("clicked", self.manual_data_refresh)
 
-        self.load_current_icons()
-
         # Update weather data and GUI elements for the first time when data is retrieved and city is set
         self.weather_manager.get_new_weather_data()
         self.current_data_refresh()
         self.hourly_data_refresh()
         self.daily_data_refresh()
+
+        # Load the icons
+        self.load_cur_data_icon()
+        self.load_hourly_icons()
 
         Gtk.main()
 
@@ -153,6 +155,7 @@ class GUIManager:
             date = str(self.api_manager.get_daily_time()[index])
             self.builder.get_object("daily_date_daily" + str(index)).set_text(date)
 
+    # Loads image into GtkImage object and resizes it
     def load_icon(self, image, image_file, width, height):
         pixbuf = GdkPixbuf.Pixbuf.new_from_file(image_file)
 
@@ -162,9 +165,25 @@ class GUIManager:
         # Set the resized image as the source of the GtkImage widget
         image.set_from_pixbuf(pixbuf)
 
-    def load_current_icons(self):
+    # Determines which icon to use based on the weather conditions
+    def set_data_icon(self, image, data):
+        rain = data["rain"]
+        snow = data["snowfall"]
+        cloudcover = data["cloudcover"]
+
+        if rain > 1:
+            self.load_icon(image, "Assets/Icons/cloud_rain.png", 30, 30)
+        elif snow > 1:
+            self.load_icon(image, "Assets/Icons/cloud_snow.png", 30, 30)
+        elif cloudcover >= 30:
+            self.load_icon(image, "Assets/Icons/cloud.png", 30, 30)
+        else:
+            self.load_icon(image, "Assets/Icons/sunny.png", 30, 30)
+
+    # Loads icon for current weather data
+    def load_cur_data_icon(self):
         current_temperature = self.builder.get_object("current_weather_icon")
-        self.load_icon(current_temperature, "Assets/Icons/temp.png", 30, 30)
+        self.set_data_icon(current_temperature, self.api_manager.get_cur_data())
 
         current_wind = self.builder.get_object("current_windspeed_icon")
         self.load_icon(current_wind, "Assets/Icons/wind.png", 30, 30)
@@ -177,3 +196,15 @@ class GUIManager:
 
         current_snow = self.builder.get_object("current_snow_icon")
         self.load_icon(current_snow, "Assets/Icons/snow.png", 30, 30)
+
+    # Loads icons for hourly forecast
+    def load_hourly_icons(self):
+        for hour in range(24):
+            weather_data = self.api_manager.get_hourly_data()
+            data = {
+                "rain": weather_data["rain"][hour],
+                "snowfall": weather_data["snowfall"][hour],
+                "cloudcover": weather_data["cloudcover"][hour]
+            }
+            icon = self.builder.get_object("icon_hourly" + str(hour))
+            self.set_data_icon(icon, data)
