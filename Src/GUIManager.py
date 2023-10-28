@@ -50,7 +50,7 @@ class GUIManager:
         def set_city_from_input(self):
             selected_city = str(Gtk.Entry.get_text(input_box))
             set_city_status = weather_manager.set_city(selected_city)
-            if set_city_status == Status.SUCCESS:
+            if set_city_status == 200:
                 input_window.destroy()
                 Gtk.main_quit()
                 
@@ -78,8 +78,8 @@ class GUIManager:
         # Tells the auto data refresh function to return, so we can exit out of the program properly
         self.exit = True
 
-    # Updates GUI elements every 60 minutes
-    # Updates only GUI because weather manager updates the data every 60 minutes, so doing it here is not needed
+    # Updates GUI elements once weather manager updates
+    # Updates only GUI because weather manager updates the data every UPDATE_INTERVAL, so doing it here is not needed
     def automatic_data_refresh(self):
         last_update = None
 
@@ -185,6 +185,7 @@ class GUIManager:
 
     # Loads image into GtkImage object and resizes it
     def load_icon(self, image, image_file, width, height):
+        # Load image from file
         pixbuf = GdkPixbuf.Pixbuf.new_from_file(image_file)
 
         # Resize the image

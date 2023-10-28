@@ -3,10 +3,8 @@ import json
 from enum import Enum
 
 class Status(Enum):
-    SUCCESS = 0
     ERROR_NO_INTERNET = 1
     ERROR_CITY_NOT_FOUND = 2
-    ERROR_400 = 3
 
 class WeatherAPI:
     def __init__(self):
@@ -31,14 +29,14 @@ class WeatherAPI:
         
         if api_response.status_code == 200:
             location_data = json.loads(api_response.text)
+
             if len(location_data) == 1:
                 return Status.ERROR_CITY_NOT_FOUND
 
             self.latitude = location_data["results"][0]["latitude"]
             self.longitude = location_data["results"][0]["longitude"]
-            return Status.SUCCESS
-        elif api_response.status_code == 400:
-            return Status.ERROR_400
+        
+        return api_response.status_code
 
     # Retrieves weather data for selected city using open-meteo API
     def retrieve_api_data(self, city) -> str:
@@ -46,18 +44,17 @@ class WeatherAPI:
             return Status.ERROR_NO_INTERNET
         
         coord_retrieve_response = self.retrieve_coordinates(city)
-        if coord_retrieve_response != Status.SUCCESS:
+        if coord_retrieve_response != 200:
             return coord_retrieve_response
         
         api_response = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude={self.latitude}&longitude={self.longitude}&current=temperature_2m,is_day,precipitation,rain,showers,snowfall,cloudcover,windspeed_10m,winddirection_10m&hourly=temperature_2m,precipitation_probability,rain,showers,snowfall,cloudcover,windspeed_10m,winddirection_10m,is_day&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,rain_sum,showers_sum,snowfall_sum,precipitation_hours,precipitation_probability_max,windspeed_10m_max,winddirection_10m_dominant&timezone=auto&windspeed_unit=ms")
         
         if api_response.status_code == 200:
             self.weather_data = json.loads(api_response.text)
-            return Status.SUCCESS
-        elif api_response.status_code == 400:
-            return Status.ERROR_400
+        
+        return api_response.status_code
     
-    def have_data(self) -> bool:
+    def retrieved_data(self) -> bool:
         return False if self.weather_data is None else True
 
     ##

@@ -9,12 +9,12 @@ class WeatherManager:
         self.city = None
         self.exit = False
         self.api_manager = WeatherAPI()
-        
+
     # Mainloop of this program
     # Updates weather data
     # Takes care of possible errors that the user may encounter
     def update_weather(self) -> None:
-        self.start_time = time.time()
+        self.last_update = time.time()
         # Initialized to UPDATE_INTERVAL so it updates on launch
         self.wait_time = UPDATE_INTERVAL
 
@@ -22,25 +22,25 @@ class WeatherManager:
         while not self.exit:
             # If the user chose a city
             if self.city != None:
-                # Updates every 60 minutes
+                # Updates every UPDATE_INTERVAL
                 if self.wait_time >= UPDATE_INTERVAL:
                     # Get data from the API
                     api_response = self.get_new_weather_data()
 
                     # If there is no internet connection, error 400 was returned on cordinate retrieve failed(error 400 returned in coordinate retrieve function)
-                    while api_response == Status.ERROR_NO_INTERNET or api_response == Status.ERROR_400:
+                    while api_response != 200:
                         # Just keep trying to reach the API data, there is not much else we can do
                         api_response = self.get_new_weather_data()
                         time.sleep(5)
                     
                     # Reset the start timer to current time
-                    self.start_time = time.time()
+                    self.last_update = time.time()
 
                 # Get current time
                 cur_time = time.time()
 
                 # Get wait time
-                self.wait_time = cur_time - self.start_time
+                self.wait_time = cur_time - self.last_update
 
     # Gets new data from the API
     def get_new_weather_data(self):
@@ -48,7 +48,7 @@ class WeatherManager:
 
     # Returns the last time(date) that the weather info got updated
     def get_last_update(self):
-        return self.start_time
+        return self.last_update
 
     # Sets location(where we want to see the forecast)
     # Also checks for any potential errors
@@ -57,19 +57,20 @@ class WeatherManager:
         api_response = self.api_manager.retrieve_coordinates(city)
 
         # If something failed, return the error message
-        if api_response != Status.SUCCESS:
+        if api_response != 200:
             return api_response
 
         # If nothing failed and city is valid, set the city name
         self.city = city
 
-        # Return success
-        return Status.SUCCESS
+        # Return api_message(that is 200)
+        return api_response
     
     # Returns API manager that gets updated after x minutes and stores all needed data
     def get_weather_api(self) -> WeatherAPI:
         return self.api_manager
     
+    # Returns city that is currently set
     def get_city(self) -> str:
         return self.city
 
@@ -85,4 +86,4 @@ class WeatherManager:
     
     # Checks if data was received from the API
     def data_received(self) -> bool:
-        return False if not self.get_weather_api().have_data() else True
+        return False if not self.get_weather_api().retrieved_data() else True
