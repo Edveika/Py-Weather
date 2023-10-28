@@ -2,25 +2,28 @@ from WeatherAPI import WeatherAPI, Status
 import threading
 import time
 
+UPDATE_INTERVAL = 3600
+
 class WeatherManager:
     def __init__(self) -> None:
         self.city = None
         self.exit = False
         self.api_manager = WeatherAPI()
-        self.start_time = time.time()
-        # Initialized to 3600 so it updates on launch
-        self.wait_time = 3600
-
+        
     # Mainloop of this program
     # Updates weather data
     # Takes care of possible errors that the user may encounter
     def update_weather(self) -> None:
+        self.start_time = time.time()
+        # Initialized to UPDATE_INTERVAL so it updates on launch
+        self.wait_time = UPDATE_INTERVAL
+
         # Program will run until exit flag is set
         while not self.exit:
             # If the user chose a city
             if self.city != None:
                 # Updates every 60 minutes
-                if self.wait_time >= 3600:
+                if self.wait_time >= UPDATE_INTERVAL:
                     # Get data from the API
                     api_response = self.get_new_weather_data()
 
@@ -28,7 +31,7 @@ class WeatherManager:
                     while api_response == Status.ERROR_NO_INTERNET or api_response == Status.ERROR_400:
                         # Just keep trying to reach the API data, there is not much else we can do
                         api_response = self.get_new_weather_data()
-                        time.sleep(30)
+                        time.sleep(5)
                     
                     # Reset the start timer to current time
                     self.start_time = time.time()
@@ -42,6 +45,10 @@ class WeatherManager:
     # Gets new data from the API
     def get_new_weather_data(self):
         return self.api_manager.retrieve_api_data(self.city)
+
+    # Returns the last time(date) that the weather info got updated
+    def get_last_update(self):
+        return self.start_time
 
     # Sets location(where we want to see the forecast)
     # Also checks for any potential errors

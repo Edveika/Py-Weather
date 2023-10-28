@@ -81,23 +81,16 @@ class GUIManager:
     # Updates GUI elements every 60 minutes
     # Updates only GUI because weather manager updates the data every 60 minutes, so doing it here is not needed
     def automatic_data_refresh(self):
-        start_time = time.time()
-        # Set to 3660 so it updates on launch
-        ellapsed_time = 3610
+        last_update = None
 
         # If exit flag is set, the loop will close, function will return
         while not self.exit:
-             # Every 60 minutes
-             # We give some extra time in case the data was not retrieved
-             # TODO: add update time in weather manager, so this is not hardcoded
-             if ellapsed_time >= 3610:
-                 # Update the gui and reset time
+             # Syncs with weather manager's update
+             if last_update != self.weather_manager.get_last_update():
+                 # Update the gui elements
                  self.update_elements()
-                 start_time = time.time()
-
-             # Get cur time to check how much time has passed
-             cur_time = time.time()
-             ellapsed_time = cur_time - start_time
+                 # Set last update date of the data(not GUI)
+                 last_update = self.weather_manager.get_last_update()
 
     # TODO: prevent user from spamming refresh
     # When refresh button is pressed, new data gets pulled from the API
