@@ -21,7 +21,7 @@ class WeatherAPI:
             return False
 
     # Retrieves coordinates of a city by using geocoding API
-    def retrieve_coordinates(self, city) -> str:
+    def retrieve_coordinates(self, city) -> int:
         if not self.connected_to_internet():
             return Status.ERROR_NO_INTERNET
         
@@ -39,7 +39,7 @@ class WeatherAPI:
         return api_response.status_code
 
     # Retrieves weather data for selected city using open-meteo API
-    def retrieve_api_data(self, city) -> str:
+    def retrieve_api_data(self, city) -> int:
         if not self.connected_to_internet():
             return Status.ERROR_NO_INTERNET
         
