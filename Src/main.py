@@ -22,7 +22,8 @@ def main():
     # Starts the GUI
     gui_manager.main_window()
 
-    # Set exit flag to stop weather manager when main window is closed, exit the app
+    # Set exit flag to stop weather and GUI manager when main window is closed, exit the app
     weather_manager.set_exit_flag()
+    gui_manager.set_exit_flag()
 
 main()

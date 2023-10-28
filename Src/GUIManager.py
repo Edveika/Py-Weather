@@ -26,7 +26,7 @@ class GUIManager:
         # Ask user to input a city and if the city is set, draw the gui
         if self.city_input_window():
             # If the city is not set or data is not received, wait because we cant display anything
-            while not self.weather_manager.city_is_set() or not self.weather_manager.data_received():
+            while not self.weather_manager.city_is_set() or not self.api_manager.retrieved_data():
                 time.sleep(1)
 
             # Start auto-update thread
@@ -36,7 +36,7 @@ class GUIManager:
     # City input window
     # Simply gets input from the user, checks if city was found
     # Returns true if city was set, false if it was not set
-    def city_input_window(self) -> True:
+    def city_input_window(self) -> bool:
         input_window = self.builder.get_object("city_input_window")
         input_window.show_all()
         input_window.connect("destroy", Gtk.main_quit)
@@ -50,13 +50,12 @@ class GUIManager:
             if set_city_status == 200:
                 input_window.destroy()
                 Gtk.main_quit()
-                return True
                 
         apply_city_btn = self.builder.get_object("apply_city")
         apply_city_btn.connect("clicked", set_city_from_input)
 
         Gtk.main()
-        return False
+        return True if self.weather_manager.get_city() else False
 
     # The main window of the application
     # Shows weather data that was retrieved from open-meteo API of the city that the user chose
@@ -74,8 +73,6 @@ class GUIManager:
         self.load_hourly_icons()
 
         Gtk.main()
-        # Tells the auto data refresh function to return, so we can exit out of the program properly
-        self.exit = True
 
     # Updates GUI elements once weather manager updates
     # Updates only GUI because weather manager updates the data every UPDATE_INTERVAL, so doing it here is not needed
