@@ -15,6 +15,9 @@ class GUIManager:
         # Exit flag for GUI element auto-update
         self.exit = False
 
+        # Bool for manual refresh button
+        self.manual_refresh = False
+
         # Reference to weather and api managers
         self.weather_manager = weather_manager
         self.api_manager = weather_manager.get_weather_api()
@@ -82,17 +85,22 @@ class GUIManager:
         # If exit flag is set, the loop will close, function will return
         while not self.exit:
              # Syncs with weather manager's update
-             if last_update != self.weather_manager.get_last_update():
+            if last_update != self.weather_manager.get_last_update():
                  # Update the gui elements
                  self.update_elements()
                  # Set last update date of the data(not GUI)
                  last_update = self.weather_manager.get_last_update()
+            # If refresh button was clicked
+            if self.manual_refresh:
+                # Refresh data, update GUI
+                self.weather_manager.get_new_weather_data()
+                self.update_elements()
+                # Reset manual update flag
+                self.manual_refresh = False
 
-    # TODO: prevent user from spamming refresh
     # When refresh button is pressed, new data gets pulled from the API
     def manual_data_refresh(self, buttton):
-        update_thread = threading.Thread(target=self.update_all)
-        update_thread.start()
+        self.manual_refresh = True
         
     # Updates the GUI data of current weather
     def current_data_refresh(self):

@@ -49,6 +49,9 @@ class WeatherManager:
     # Returns the last time(date) that the weather info got updated
     def get_last_update(self):
         return self.last_update
+    
+    def set_last_update(self, date):
+        self.last_update = date
 
     # Sets location(where we want to see the forecast)
     # Also checks for any potential errors
