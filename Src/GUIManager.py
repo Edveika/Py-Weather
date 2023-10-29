@@ -2,7 +2,7 @@ import gi
 # If multiple versions of GTK installed, make sure 3.0 is installed as well
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GdkPixbuf
-from WeatherAPI import WeatherAPI, Status
+from WeatherAPI import WeatherAPI, APIStatus
 from WeatherManager import WeatherManager
 import threading
 import time
@@ -50,7 +50,7 @@ class GUIManager:
         def set_city_from_input(self):
             selected_city = str(Gtk.Entry.get_text(input_box)).upper()
             set_city_status = weather_manager.set_city(selected_city)
-            if set_city_status == Status.SUCCESS:
+            if set_city_status == APIStatus.SUCCESS:
                 input_window.destroy()
                 Gtk.main_quit()
                 

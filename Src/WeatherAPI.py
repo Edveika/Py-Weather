@@ -2,7 +2,7 @@ import requests
 import json
 from enum import Enum
 
-class Status(Enum):
+class APIStatus(Enum):
     SUCCESS = 200
     ERROR_NO_INTERNET = 1
     ERROR_CITY_NOT_FOUND = 2
@@ -24,15 +24,15 @@ class WeatherAPI:
     # Retrieves coordinates of a city by using geocoding API
     def retrieve_coordinates(self, city) -> int:
         if not self.connected_to_internet():
-            return Status.ERROR_NO_INTERNET
+            return APIStatus.ERROR_NO_INTERNET
         
         api_response = requests.get(f"https://geocoding-api.open-meteo.com/v1/search?name={city}")
         
-        if api_response.status_code == Status.SUCCESS:
+        if api_response.status_code == APIStatus.SUCCESS:
             location_data = json.loads(api_response.text)
 
             if len(location_data) == 1:
-                return Status.ERROR_CITY_NOT_FOUND
+                return APIStatus.ERROR_CITY_NOT_FOUND
 
             self.latitude = location_data["results"][0]["latitude"]
             self.longitude = location_data["results"][0]["longitude"]
@@ -42,15 +42,15 @@ class WeatherAPI:
     # Retrieves weather data for selected city using open-meteo API
     def retrieve_api_data(self, city) -> int:
         if not self.connected_to_internet():
-            return Status.ERROR_NO_INTERNET
+            return APIStatus.ERROR_NO_INTERNET
         
         coord_retrieve_response = self.retrieve_coordinates(city)
-        if coord_retrieve_response != Status.SUCCESS:
+        if coord_retrieve_response != APIStatus.SUCCESS:
             return coord_retrieve_response
         
         api_response = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude={self.latitude}&longitude={self.longitude}&current=temperature_2m,is_day,precipitation,rain,showers,snowfall,cloudcover,windspeed_10m,winddirection_10m&hourly=temperature_2m,precipitation_probability,rain,showers,snowfall,cloudcover,windspeed_10m,winddirection_10m,is_day&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,rain_sum,showers_sum,snowfall_sum,precipitation_hours,precipitation_probability_max,windspeed_10m_max,winddirection_10m_dominant&timezone=auto&windspeed_unit=ms")
         
-        if api_response.status_code == Status.SUCCESS:
+        if api_response.status_code == APIStatus.SUCCESS:
             self.weather_data = json.loads(api_response.text)
         
         return api_response.status_code
