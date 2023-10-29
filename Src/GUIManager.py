@@ -50,7 +50,7 @@ class GUIManager:
         def set_city_from_input(self):
             selected_city = str(Gtk.Entry.get_text(input_box)).upper()
             set_city_status = weather_manager.set_city(selected_city)
-            if set_city_status == 200:
+            if set_city_status == Status.SUCCESS:
                 input_window.destroy()
                 Gtk.main_quit()
                 
