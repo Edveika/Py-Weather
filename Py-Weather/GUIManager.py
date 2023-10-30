@@ -12,7 +12,7 @@ class GUIManager:
     # Stores reference to weather manager inside self
     # Loads GUI .glade file
     # Asks user to input a city
-    def __init__(self, weather_manager):
+    def __init__(self, weather_manager: WeatherManager):
         # Exit flag for GUI element auto-update
         self.exit = False
 
@@ -21,13 +21,19 @@ class GUIManager:
 
         # Reference to weather and api managers
         self.weather_manager = weather_manager
-        self.api_manager = weather_manager.get_weather_api()
-
+        self.api_manager: WeatherAPI = weather_manager.get_weather_api()
+        
         # Get path to this file
         self.cur_path = os.path.dirname(os.path.abspath(__file__))
 
         # Create GtkBuilder instance and load .glade file
         self.builder = Gtk.Builder()
+
+        # If .glade file does not exist
+        if not os.path.exists(self.cur_path + "/GUI/Py-Weather-GUI.glade"):
+            # Show an error and exit
+            self.show_message_box(Gtk.MessageType.ERROR, "Not found: " + self.cur_path + "/GUI/Py-Weather-GUI.glade")
+            exit()
         self.builder.add_from_file(self.cur_path + "/GUI/Py-Weather-GUI.glade")
 
         # Ask user to input a city and if the city is set, draw the gui
@@ -40,6 +46,10 @@ class GUIManager:
             refresh_thread = threading.Thread(target=self.data_refresh)
             refresh_thread.start()
 
+            # Load the icons
+            self.load_cur_image()
+            self.load_hourly_image()
+
     # City input window
     # Simply gets input from the user, checks if city was found
     # Returns true if city was set, false if it was not set
@@ -49,14 +59,21 @@ class GUIManager:
         input_window.connect("destroy", Gtk.main_quit)
 
         input_box = self.builder.get_object("city_name_input")
+        current_self = self
 
-        weather_manager = self.weather_manager
-        def set_city_from_input(self):
+        def set_city_from_input(button):
+            nonlocal current_self
             selected_city = str(Gtk.Entry.get_text(input_box)).upper()
-            set_city_status = weather_manager.set_city(selected_city)
+            set_city_status = current_self.weather_manager.set_city(selected_city)
             if set_city_status == APIStatus.SUCCESS.value:
                 input_window.destroy()
                 Gtk.main_quit()
+            elif set_city_status == APIStatus.ERROR_NO_INTERNET:
+                current_self.show_message_box(Gtk.MessageType.ERROR, "No internet connection")
+            elif set_city_status == APIStatus.ERROR_CITY_NOT_FOUND:
+                current_self.show_message_box(Gtk.MessageType.ERROR, "City not found")
+            elif set_city_status != APIStatus.SUCCESS.value:
+                current_self.show_message_box(Gtk.MessageType.ERROR, "ERROR: " + str(set_city_status))
                 
         apply_city_btn = self.builder.get_object("apply_city")
         apply_city_btn.connect("clicked", set_city_from_input)
@@ -75,10 +92,6 @@ class GUIManager:
         # Refresh button pulls new data from the API and updates the GUI
         self.builder.get_object("weather_refresh").connect("clicked", self.manual_data_refresh)
 
-        # Load the icons
-        self.load_cur_image()
-        self.load_hourly_image()
-
         Gtk.main()
 
     # Updates GUI elements once weather manager updates
@@ -91,15 +104,28 @@ class GUIManager:
         while not self.exit:
              # Syncs with weather manager's update
             if last_update != self.weather_manager.get_last_update():
-                 # Update the gui elements
-                 self.update_elements()
-                 # Set last update date of the data(not GUI)
-                 last_update = self.weather_manager.get_last_update()
+                api_response = self.weather_manager.get_response()
+
+                if api_response == APIStatus.SUCCESS.value:
+                    # Update the gui elements
+                    self.update_elements()
+                    # Set last update date of the data(not GUI)
+                    last_update = self.weather_manager.get_last_update()
+                elif api_response == APIStatus.ERROR_NO_INTERNET:
+                    self.show_message_box(Gtk.MessageType.ERROR, "Data refresh fail, no internet connection")
+                elif api_response != APIStatus.SUCCESS.value:
+                    self.show_message_box(Gtk.MessageType.ERROR, "ERROR: " + str(api_response))
             # If refresh button was clicked
             if self.manual_refresh:
                 # Refresh data, update GUI
-                self.weather_manager.get_new_weather_data()
-                self.update_elements()
+                api_response = self.weather_manager.get_new_weather_data()
+                if api_response == APIStatus.SUCCESS.value:
+                    self.update_elements()
+                elif api_response == APIStatus.ERROR_NO_INTERNET:
+                    self.show_message_box(Gtk.MessageType.ERROR, "Data refresh fail, no internet connection")
+                elif api_response != APIStatus.SUCCESS.value:
+                    self.show_message_box(Gtk.MessageType.ERROR, "ERROR: " + str(api_response))
+
                 # Reset manual update flag
                 self.manual_refresh = False
 
@@ -188,7 +214,13 @@ class GUIManager:
         self.update_daily_elements()
 
     # Loads image into GtkImage object and resizes it
-    def load_image(self, image, image_file, width, height):
+    def load_image(self, image, image_file, width, height):\
+        # If the file does not exist
+        if not os.path.exists(self.cur_path + image_file):
+            # Show an error, stop weather,  manager and exit
+            self.show_message_box(Gtk.MessageType.ERROR, "Not found: " + image_file)
+            exit()
+
         # Load image from file
         pixbuf = GdkPixbuf.Pixbuf.new_from_file(image_file)
 
@@ -245,3 +277,14 @@ class GUIManager:
     # Sets exit flag and stops update thread
     def set_exit_flag(self):
         self.exit = True
+
+    def show_message_box(self, type, message):
+        dialog = Gtk.MessageDialog(
+            transient_for=None,
+            flags=0,
+            message_type=type,
+            buttons=Gtk.ButtonsType.OK,
+            text=message
+        )
+        dialog.run()
+        dialog.destroy()

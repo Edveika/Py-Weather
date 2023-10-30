@@ -25,12 +25,12 @@ class WeatherManager:
                 # Updates every UPDATE_INTERVAL
                 if self.wait_time >= UPDATE_INTERVAL:
                     # Get data from the API
-                    api_response = self.get_new_weather_data()
+                    self.api_response = self.get_new_weather_data()
 
                     # If there is no internet connection, error 400 was returned on cordinate retrieve failed(error 400 returned in coordinate retrieve function)
-                    while api_response != APIStatus.SUCCESS.value:
+                    while self.api_response != APIStatus.SUCCESS.value:
                         # Just keep trying to reach the API data, there is not much else we can do
-                        api_response = self.get_new_weather_data()
+                        self.api_response = self.get_new_weather_data()
                         time.sleep(5)
                     
                     # Reset the start timer to current time
@@ -41,6 +41,10 @@ class WeatherManager:
 
                 # Get wait time
                 self.wait_time = cur_time - self.last_update
+
+    # Returns response of the API call
+    def get_response(self):
+        return self.api_response
 
     # Gets new data from the API
     def get_new_weather_data(self):
