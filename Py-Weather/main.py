@@ -28,7 +28,9 @@ def main():
         try:
             gui_manager.main_window()
         except SystemExit:
-            print("holly fuck")
+            gui_manager.set_exit_flag()
+            weather_manager.set_exit_flag()
+            weather_manager.join()
 
     # Set exit flag to stop weather and GUI manager when main window is closed, exit the app
     weather_manager.set_exit_flag()
