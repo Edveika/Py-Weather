@@ -130,56 +130,56 @@ class GUIManager:
     def update_hourly_elements(self):
         units = self.api_manager.get_hourly_units()
 
-        for index in range(24):
-            time = str(self.api_manager.get_hourly_time()[index])
-            self.builder.get_object("hourly_time" + str(index)).set_text(time.split("T")[1])
+        for hour in range(24):
+            time = str(self.api_manager.get_hourly_time()[hour])
+            self.builder.get_object("hourly_time" + str(hour)).set_text(time.split("T")[1])
 
-            temperature = str(self.api_manager.get_hourly_temperature()[index]) + units["temperature_2m"]
-            self.builder.get_object("hourly_temp" + str(index)).set_text("Temp: " + temperature)
+            temperature = str(self.api_manager.get_hourly_temperature()[hour]) + units["temperature_2m"]
+            self.builder.get_object("hourly_temp" + str(hour)).set_text("Temp: " + temperature)
 
-            rain = str(self.api_manager.get_hourly_rain()[index]) + units["rain"]
-            self.builder.get_object("hourly_rain" + str(index)).set_text("Rain: " + rain)
+            rain = str(self.api_manager.get_hourly_rain()[hour]) + units["rain"]
+            self.builder.get_object("hourly_rain" + str(hour)).set_text("Rain: " + rain)
             
-            snow = str(self.api_manager.get_hourly_snowfall()[index]) + units["snowfall"]
-            self.builder.get_object("hourly_snow" + str(index)).set_text("Snow: " + snow)
+            snow = str(self.api_manager.get_hourly_snowfall()[hour]) + units["snowfall"]
+            self.builder.get_object("hourly_snow" + str(hour)).set_text("Snow: " + snow)
 
-            cloudcover = str(self.api_manager.get_hourly_cloudcover()[index]) + units["cloudcover"]
-            self.builder.get_object("hourly_cloudcover" + str(index)).set_text("Cloudcover: " + cloudcover)
+            cloudcover = str(self.api_manager.get_hourly_cloudcover()[hour]) + units["cloudcover"]
+            self.builder.get_object("hourly_cloudcover" + str(hour)).set_text("Cloudcover: " + cloudcover)
 
-            windspeed = str(self.api_manager.get_hourly_windspeed()[index]) + units["windspeed_10m"]
-            self.builder.get_object("hourly_windspeed" + str(index)).set_text("Wind: " + windspeed)
+            windspeed = str(self.api_manager.get_hourly_windspeed()[hour]) + units["windspeed_10m"]
+            self.builder.get_object("hourly_windspeed" + str(hour)).set_text("Wind: " + windspeed)
 
-            precipitation_prob = str(self.api_manager.get_hourly_precipitation_probability()[index]) + units["precipitation_probability"]
-            self.builder.get_object("hourly_rain_prob" + str(index)).set_text("Precip prob: " + precipitation_prob)
+            precipitation_prob = str(self.api_manager.get_hourly_precipitation_probability()[hour]) + units["precipitation_probability"]
+            self.builder.get_object("hourly_rain_prob" + str(hour)).set_text("Precip prob: " + precipitation_prob)
             
     # Updates the GUI data of daily weather forecast
     def update_daily_elements(self):
         units = self.api_manager.get_daily_units()
 
-        for index in range(7):
-            windspeed = str(self.api_manager.get_daily_windspeed_max()[index]) + units["windspeed_10m_max"]
-            self.builder.get_object("windspeed_daily" + str(index)).set_text("Wind: " + windspeed)
+        for day in range(7):
+            windspeed = str(self.api_manager.get_daily_windspeed_max()[day]) + units["windspeed_10m_max"]
+            self.builder.get_object("windspeed_daily" + str(day)).set_text("Wind: " + windspeed)
             
-            precipitation_prob = str(self.api_manager.get_daily_precipitation_probability_max()[index]) + units["precipitation_probability_max"]
-            self.builder.get_object("rain_prob_daily" + str(index)).set_text("Precip prob: " + precipitation_prob)
+            precipitation_prob = str(self.api_manager.get_daily_precipitation_probability_max()[day]) + units["precipitation_probability_max"]
+            self.builder.get_object("rain_prob_daily" + str(day)).set_text("Precip prob: " + precipitation_prob)
 
-            precipitation_sum = str(self.api_manager.get_daily_precipitation_sum()[index]) + units["precipitation_sum"]
-            self.builder.get_object("precipitation_sum_daily" + str(index)).set_text("Precip sum: " + precipitation_sum)
+            precipitation_sum = str(self.api_manager.get_daily_precipitation_sum()[day]) + units["precipitation_sum"]
+            self.builder.get_object("precipitation_sum_daily" + str(day)).set_text("Precip sum: " + precipitation_sum)
 
-            sunset = str(self.api_manager.get_daily_sunset()[index])
-            self.builder.get_object("sunset_daily" + str(index)).set_text("Sunset: " + sunset.split("T")[1])
+            sunset = str(self.api_manager.get_daily_sunset()[day])
+            self.builder.get_object("sunset_daily" + str(day)).set_text("Sunset: " + sunset.split("T")[1])
 
-            sunrise = str(self.api_manager.get_daily_sunrise()[index])
-            self.builder.get_object("sunrise_daily" + str(index)).set_text("Sunrise: " + sunrise.split("T")[1])
+            sunrise = str(self.api_manager.get_daily_sunrise()[day])
+            self.builder.get_object("sunrise_daily" + str(day)).set_text("Sunrise: " + sunrise.split("T")[1])
 
-            temp_max = str(self.api_manager.get_daily_temperature_max()[index]) + units["temperature_2m_max"]
-            self.builder.get_object("temp_max_daily" + str(index)).set_text("Max temp: " + temp_max)
+            temp_max = str(self.api_manager.get_daily_temperature_max()[day]) + units["temperature_2m_max"]
+            self.builder.get_object("temp_max_daily" + str(day)).set_text("Max temp: " + temp_max)
 
-            temp_min = str(self.api_manager.get_daily_temperature_min()[index]) + units["temperature_2m_min"]
-            self.builder.get_object("temp_min_daily" + str(index)).set_text("Min temp: " + temp_min)
+            temp_min = str(self.api_manager.get_daily_temperature_min()[day]) + units["temperature_2m_min"]
+            self.builder.get_object("temp_min_daily" + str(day)).set_text("Min temp: " + temp_min)
 
-            date = str(self.api_manager.get_daily_time()[index])
-            self.builder.get_object("daily_date_daily" + str(index)).set_text(date)
+            date = str(self.api_manager.get_daily_time()[day])
+            self.builder.get_object("daily_date_daily" + str(day)).set_text(date)
 
     # Updates all GUI elements
     def update_elements(self):
