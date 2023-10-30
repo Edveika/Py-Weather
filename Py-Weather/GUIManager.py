@@ -200,9 +200,9 @@ class GUIManager:
         snow = data["snowfall"]
         cloudcover = data["cloudcover"]
 
-        if rain > 1:
+        if rain > 0:
             self.load_image(image, "Assets/Icons/cloud_rain.png", 30, 30)
-        elif snow > 1:
+        elif snow > 0:
             self.load_image(image, "Assets/Icons/cloud_snow.png", 30, 30)
         elif cloudcover >= 30:
             self.load_image(image, "Assets/Icons/cloud.png", 30, 30)
