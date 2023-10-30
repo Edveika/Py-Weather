@@ -6,6 +6,7 @@ from WeatherAPI import WeatherAPI, APIStatus
 from WeatherManager import WeatherManager
 import threading
 import time
+import os
 
 class GUIManager:
     # Stores reference to weather manager inside self
@@ -22,9 +23,12 @@ class GUIManager:
         self.weather_manager = weather_manager
         self.api_manager = weather_manager.get_weather_api()
 
+        # Get path to this file
+        self.cur_path = os.path.dirname(os.path.abspath(__file__))
+
         # Create GtkBuilder instance and load .glade file
         self.builder = Gtk.Builder()
-        self.builder.add_from_file("GUI/Py-Weather-GUI.glade")
+        self.builder.add_from_file(self.cur_path + "/GUI/Py-Weather-GUI.glade")
 
         # Ask user to input a city and if the city is set, draw the gui
         if self.city_input_window():
@@ -201,13 +205,13 @@ class GUIManager:
         cloudcover = data["cloudcover"]
 
         if rain > 0:
-            self.load_image(image, "Assets/Icons/cloud_rain.png", 30, 30)
+            self.load_image(image, self.cur_path + "/Assets/Icons/cloud_rain.png", 30, 30)
         elif snow > 0:
-            self.load_image(image, "Assets/Icons/cloud_snow.png", 30, 30)
+            self.load_image(image, self.cur_path + "/Assets/Icons/cloud_snow.png", 30, 30)
         elif cloudcover >= 30:
-            self.load_image(image, "Assets/Icons/cloud.png", 30, 30)
+            self.load_image(image, self.cur_path + "/Assets/Icons/cloud.png", 30, 30)
         else:
-            self.load_image(image, "Assets/Icons/sunny.png", 30, 30)
+            self.load_image(image, self.cur_path + "/Assets/Icons/sunny.png", 30, 30)
 
     # Loads icon for current weather data
     def load_cur_image(self):
@@ -215,16 +219,16 @@ class GUIManager:
         self.set_data_image(current_temperature, self.api_manager.get_cur_data())
 
         current_wind = self.builder.get_object("current_windspeed_icon")
-        self.load_image(current_wind, "Assets/Icons/wind.png", 30, 30)
+        self.load_image(current_wind, self.cur_path + "/Assets/Icons/wind.png", 30, 30)
 
         current_cloud = self.builder.get_object("current_cloudcover_icon")
-        self.load_image(current_cloud, "Assets/Icons/cloud.png", 30, 30)
+        self.load_image(current_cloud, self.cur_path + "/Assets/Icons/cloud.png", 30, 30)
 
         current_rain = self.builder.get_object("current_rain_icon")
-        self.load_image(current_rain, "Assets/Icons/rain.png", 30, 30)
+        self.load_image(current_rain, self.cur_path + "/Assets/Icons/rain.png", 30, 30)
 
         current_snow = self.builder.get_object("current_snow_icon")
-        self.load_image(current_snow, "Assets/Icons/snow.png", 30, 30)
+        self.load_image(current_snow, self.cur_path + "/Assets/Icons/snow.png", 30, 30)
 
     # Loads icons for hourly forecast
     def load_hourly_image(self):
