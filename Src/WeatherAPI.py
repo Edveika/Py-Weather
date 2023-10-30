@@ -28,7 +28,7 @@ class WeatherAPI:
         
         api_response = requests.get(f"https://geocoding-api.open-meteo.com/v1/search?name={city}")
         
-        if api_response.status_code == APIStatus.SUCCESS:
+        if api_response.status_code == APIStatus.SUCCESS.value:
             location_data = json.loads(api_response.text)
 
             if len(location_data) == 1:
@@ -45,12 +45,12 @@ class WeatherAPI:
             return APIStatus.ERROR_NO_INTERNET
         
         coord_retrieve_response = self.retrieve_coordinates(city)
-        if coord_retrieve_response != APIStatus.SUCCESS:
+        if coord_retrieve_response != APIStatus.SUCCESS.value:
             return coord_retrieve_response
         
         api_response = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude={self.latitude}&longitude={self.longitude}&current=temperature_2m,is_day,precipitation,rain,showers,snowfall,cloudcover,windspeed_10m,winddirection_10m&hourly=temperature_2m,precipitation_probability,rain,showers,snowfall,cloudcover,windspeed_10m,winddirection_10m,is_day&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,rain_sum,showers_sum,snowfall_sum,precipitation_hours,precipitation_probability_max,windspeed_10m_max,winddirection_10m_dominant&timezone=auto&windspeed_unit=ms")
         
-        if api_response.status_code == APIStatus.SUCCESS:
+        if api_response.status_code == APIStatus.SUCCESS.value:
             self.weather_data = json.loads(api_response.text)
         
         return api_response.status_code

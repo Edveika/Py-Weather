@@ -28,7 +28,7 @@ class WeatherManager:
                     api_response = self.get_new_weather_data()
 
                     # If there is no internet connection, error 400 was returned on cordinate retrieve failed(error 400 returned in coordinate retrieve function)
-                    while api_response != APIStatus.SUCCESS:
+                    while api_response != APIStatus.SUCCESS.value:
                         # Just keep trying to reach the API data, there is not much else we can do
                         api_response = self.get_new_weather_data()
                         time.sleep(5)
@@ -60,7 +60,7 @@ class WeatherManager:
         api_response = self.api_manager.retrieve_coordinates(city)
 
         # If something failed, return the error message
-        if api_response != APIStatus.SUCCESS:
+        if api_response != APIStatus.SUCCESS.value:
             return api_response
 
         # If nothing failed and city is valid, set the city name
