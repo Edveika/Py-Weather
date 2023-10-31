@@ -2928,7 +2928,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkLabel" id="windspeed_daily1">
+                              <object class="GtkLabel" id="windspeed_daily8">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">windspeed</property>
@@ -2939,7 +2939,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="rain_prob_daily1">
+                              <object class="GtkLabel" id="rain_prob_daily8">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">rain_probability</property>
@@ -2950,7 +2950,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="precipitation_sum_daily1">
+                              <object class="GtkLabel" id="precipitation_sum_daily8">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">precipitation_sum</property>
@@ -2961,7 +2961,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="sunset_daily1">
+                              <object class="GtkLabel" id="sunset_daily8">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">sunset</property>
@@ -2972,7 +2972,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="sunrise_daily1">
+                              <object class="GtkLabel" id="sunrise_daily8">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">sunrise</property>
@@ -2983,7 +2983,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="temp_max_daily1">
+                              <object class="GtkLabel" id="temp_max_daily8">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">temp_max</property>
@@ -2994,7 +2994,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="temp_min_daily1">
+                              <object class="GtkLabel" id="temp_min_daily8">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">temp_min</property>
@@ -3005,7 +3005,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="daily_date_daily1">
+                              <object class="GtkLabel" id="daily_date_daily8">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">date</property>
@@ -3037,7 +3037,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkLabel" id="windspeed_daily2">
+                              <object class="GtkLabel" id="windspeed_daily9">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">windspeed</property>
@@ -3048,7 +3048,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="rain_prob_daily2">
+                              <object class="GtkLabel" id="rain_prob_daily9">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">rain_probability</property>
@@ -3059,7 +3059,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="precipitation_sum_daily2">
+                              <object class="GtkLabel" id="precipitation_sum_daily9">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">precipitation_sum</property>
@@ -3070,7 +3070,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="sunset_daily2">
+                              <object class="GtkLabel" id="sunset_daily9">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">sunset</property>
@@ -3081,7 +3081,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="sunrise_daily2">
+                              <object class="GtkLabel" id="sunrise_daily9">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">sunrise</property>
@@ -3092,7 +3092,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="temp_max_daily2">
+                              <object class="GtkLabel" id="temp_max_daily9">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">temp_max</property>
@@ -3103,7 +3103,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="temp_min_daily2">
+                              <object class="GtkLabel" id="temp_min_daily9">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">temp_min</property>
@@ -3114,7 +3114,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="daily_date_daily2">
+                              <object class="GtkLabel" id="daily_date_daily9">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">date</property>
@@ -3146,7 +3146,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkLabel" id="windspeed_daily3">
+                              <object class="GtkLabel" id="windspeed_daily10">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">windspeed</property>
@@ -3157,7 +3157,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="rain_prob_daily3">
+                              <object class="GtkLabel" id="rain_prob_daily10">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">rain_probability</property>
@@ -3168,7 +3168,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="precipitation_sum_daily3">
+                              <object class="GtkLabel" id="precipitation_sum_daily10">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">precipitation_sum</property>
@@ -3179,7 +3179,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="sunset_daily3">
+                              <object class="GtkLabel" id="sunset_daily10">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">sunset</property>
@@ -3190,7 +3190,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="sunrise_daily3">
+                              <object class="GtkLabel" id="sunrise_daily10">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">sunrise</property>
@@ -3201,7 +3201,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="temp_max_daily3">
+                              <object class="GtkLabel" id="temp_max_daily10">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">temp_max</property>
@@ -3212,7 +3212,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="temp_min_daily3">
+                              <object class="GtkLabel" id="temp_min_daily10">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">temp_min</property>
@@ -3223,7 +3223,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="daily_date_daily3">
+                              <object class="GtkLabel" id="daily_date_daily10">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">date</property>
@@ -3255,7 +3255,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkLabel" id="windspeed_daily4">
+                              <object class="GtkLabel" id="windspeed_daily11">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">windspeed</property>
@@ -3266,7 +3266,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="rain_prob_daily4">
+                              <object class="GtkLabel" id="rain_prob_daily11">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">rain_probability</property>
@@ -3277,7 +3277,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="precipitation_sum_daily4">
+                              <object class="GtkLabel" id="precipitation_sum_daily11">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">precipitation_sum</property>
@@ -3288,7 +3288,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="sunset_daily4">
+                              <object class="GtkLabel" id="sunset_daily11">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">sunset</property>
@@ -3299,7 +3299,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="sunrise_daily4">
+                              <object class="GtkLabel" id="sunrise_daily11">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">sunrise</property>
@@ -3310,7 +3310,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="temp_max_daily4">
+                              <object class="GtkLabel" id="temp_max_daily11">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">temp_max</property>
@@ -3321,7 +3321,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="temp_min_daily4">
+                              <object class="GtkLabel" id="temp_min_daily11">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">temp_min</property>
@@ -3332,7 +3332,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="daily_date_daily4">
+                              <object class="GtkLabel" id="daily_date_daily11">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">date</property>
@@ -3364,7 +3364,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkLabel" id="windspeed_daily5">
+                              <object class="GtkLabel" id="windspeed_daily12">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">windspeed</property>
@@ -3375,7 +3375,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="rain_prob_daily5">
+                              <object class="GtkLabel" id="rain_prob_daily12">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">rain_probability</property>
@@ -3386,7 +3386,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="precipitation_sum_daily5">
+                              <object class="GtkLabel" id="precipitation_sum_daily12">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">precipitation_sum</property>
@@ -3397,7 +3397,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="sunset_daily5">
+                              <object class="GtkLabel" id="sunset_daily12">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">sunset</property>
@@ -3408,7 +3408,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="sunrise_daily5">
+                              <object class="GtkLabel" id="sunrise_daily12">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">sunrise</property>
@@ -3419,7 +3419,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="temp_max_daily5">
+                              <object class="GtkLabel" id="temp_max_daily12">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">temp_max</property>
@@ -3430,7 +3430,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="temp_min_daily5">
+                              <object class="GtkLabel" id="temp_min_daily12">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">temp_min</property>
@@ -3441,7 +3441,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="daily_date_daily5">
+                              <object class="GtkLabel" id="daily_date_daily12">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">date</property>
@@ -3473,7 +3473,7 @@
                             <property name="row-homogeneous">True</property>
                             <property name="column-homogeneous">True</property>
                             <child>
-                              <object class="GtkLabel" id="windspeed_daily6">
+                              <object class="GtkLabel" id="windspeed_daily13">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">windspeed</property>
@@ -3484,7 +3484,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="rain_prob_daily6">
+                              <object class="GtkLabel" id="rain_prob_daily13">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">rain_probability</property>
@@ -3495,7 +3495,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="precipitation_sum_daily6">
+                              <object class="GtkLabel" id="precipitation_sum_daily13">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">precipitation_sum</property>
@@ -3506,7 +3506,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="sunset_daily6">
+                              <object class="GtkLabel" id="sunset_daily13">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">sunset</property>
@@ -3517,7 +3517,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="sunrise_daily6">
+                              <object class="GtkLabel" id="sunrise_daily13">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">sunrise</property>
@@ -3528,7 +3528,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="temp_max_daily6">
+                              <object class="GtkLabel" id="temp_max_daily13">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">temp_max</property>
@@ -3539,7 +3539,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="temp_min_daily6">
+                              <object class="GtkLabel" id="temp_min_daily13">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">temp_min</property>
@@ -3550,7 +3550,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="daily_date_daily6">
+                              <object class="GtkLabel" id="daily_date_daily13">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label" translatable="yes">date</property>
