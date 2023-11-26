@@ -1,4 +1,4 @@
-# Py-Weather
+# ☀️ Py-Weather
 
 This is a simple weather application written in Python that uses PyGTK for GUI(Graphical User Interface) and Open-Meteo API for weather data. I decided to make this app because I really wanted to understand how to make API requests, try out GTK.
 
@@ -6,7 +6,7 @@ This is a simple weather application written in Python that uses PyGTK for GUI(G
 
 ![Screenshot from 2023-10-31 18-52-32](https://github.com/Edveika/Py-Weather/assets/113787144/e8045d65-79c4-4085-9eb7-af6540711270)
 
-# Features
+# 🔥 Features
 * Weather forecast
   * Current weather data
   * Hourly forecast
@@ -16,10 +16,10 @@ This is a simple weather application written in Python that uses PyGTK for GUI(G
 * Manual data refresh - you can update weather information by clicking a button
 * Automatic weather data update - new data gets pulled from the API every 60 minutes
 
-# Credits
+# 🤝 Credits
 
 [Open-Meteo](https://open-meteo.com) for a simple, free to use API
 
-# License
+# 📜 License
 
 This project is licensed under the GPL v2 [LICENSE](LICENSE).
