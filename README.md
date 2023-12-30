@@ -16,7 +16,7 @@ This is a simple weather application written in Python that uses PyGTK for GUI(G
 * Manual data refresh - you can update weather information by clicking a button
 * Automatic weather data update - new data gets pulled from the API every 60 minutes
 
-# Libraries used
+# 📔 Libraries used
 
 * PyGTK 3.0 and higher
 * threading
@@ -25,7 +25,7 @@ This is a simple weather application written in Python that uses PyGTK for GUI(G
 * json
 * requests
 
-# Issues
+# ⚠️ Issues
 
 * When refresh button is spammed, app will crash
 * Data from open-meteo label should be darker to draw less attention
