@@ -37,6 +37,7 @@ python3 main.py
 
 * When refresh button is spammed, app will crash
 * Data from open-meteo label should be darker to draw less attention
+* Make .exe and .appimage binaries
 
 # 🤝 Credits
 
