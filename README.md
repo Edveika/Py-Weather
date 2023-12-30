@@ -25,6 +25,11 @@ This is a simple weather application written in Python that uses PyGTK for GUI(G
 * json
 * requests
 
+# Issues
+
+* When refresh button is spammed, app will crash
+* Data from open-meteo label should be darker to draw less attention
+
 # 🤝 Credits
 
 [Open-Meteo](https://open-meteo.com) for a simple, free to use API
