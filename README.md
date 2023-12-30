@@ -25,6 +25,14 @@ This is a simple weather application written in Python that uses PyGTK for GUI(G
 * json
 * requests
 
+# 🏃 Running the application
+
+* Using python's interpreter in Py-Weather/Py-Weather/ dir:
+
+```
+python3 main.py
+```
+
 # ⚠️ Issues
 
 * When refresh button is spammed, app will crash
