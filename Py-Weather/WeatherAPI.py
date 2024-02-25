@@ -1,6 +1,7 @@
 import requests
 import json
 from enum import Enum
+from datetime import datetime
 
 class APIStatus(Enum):
     SUCCESS = 200
@@ -52,11 +53,19 @@ class WeatherAPI:
         
         if api_response.status_code == APIStatus.SUCCESS.value:
             self.weather_data = json.loads(api_response.text)
+            self.last_refresh = datetime.now()
         
         return api_response.status_code
     
     def retrieved_data(self) -> bool:
         return False if self.weather_data is None else True
+
+    def can_refresh(self) -> bool:
+        time_passed = datetime.now() - self.last_refresh
+        if time_passed.seconds >= 60:
+            return True
+        else:
+            return False
 
     ##
     ## Current time data

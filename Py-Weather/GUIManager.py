@@ -117,17 +117,25 @@ class GUIManager:
                     self.show_message_box(Gtk.MessageType.ERROR, "ERROR: " + str(api_response))
             # If refresh button was clicked
             if self.manual_refresh:
-                # Refresh data, update GUI
-                api_response = self.weather_manager.get_new_weather_data()
-                if api_response == APIStatus.SUCCESS.value:
-                    self.update_elements()
-                elif api_response == APIStatus.ERROR_NO_INTERNET:
-                    self.show_message_box(Gtk.MessageType.ERROR, "Data refresh fail, no internet connection")
-                elif api_response != APIStatus.SUCCESS.value:
-                    self.show_message_box(Gtk.MessageType.ERROR, "ERROR: " + str(api_response))
+                # Checks if atleast 1 minute passed between the updates and if so updates the data once again
+                if self.api_manager.can_refresh():
+                    # Refresh data, update GUI
+                    api_response = self.weather_manager.get_new_weather_data()
+                    if api_response == APIStatus.SUCCESS.value:
+                        self.update_elements()
+                    elif api_response == APIStatus.ERROR_NO_INTERNET:
+                        self.show_message_box(Gtk.MessageType.ERROR, "Data refresh fail, no internet connection")
+                    elif api_response != APIStatus.SUCCESS.value:
+                        self.show_message_box(Gtk.MessageType.ERROR, "ERROR: " + str(api_response))
 
-                # Reset manual update flag
-                self.manual_refresh = False
+                    # Reset manual update flag
+                    self.manual_refresh = False
+                # If 1 minute did not pass
+                else:
+                    # Refresh flag gets turned off
+                    self.manual_refresh = False
+                    # Error message box is shown
+                    self.show_message_box(Gtk.MessageType.ERROR, "ERROR: " + "Wait atleast 60 seconds before refreshing")
 
     # When refresh button is pressed, manual update flag is set
     def manual_data_refresh(self, buttton):
